@@ -105,7 +105,12 @@
         "Dolor de garganta",
         "Dolor de cabeza"
       ],
-      "treatment": "No existe un tratamiento específico para la enfermedad, pero se pueden tratar los síntomas con medicamentos de venta libre. En casos graves, puede ser necesaria la hospitalización."
+      "treatment": "No existe un tratamiento específico para la enfermedad, pero se pueden tratar los síntomas con medicamentos de venta libre. En casos graves, puede ser necesaria la hospitalización.",
+      "policies":[
+        "15478488",
+        "87598852"
+        
+      ]
     },
     {
       "name": "Enfermedad 2",
@@ -117,7 +122,13 @@
         "Dolor articular",
         "Erupciones cutáneas"
       ],
-      "treatment": "No existe un tratamiento específico para la enfermedad, pero se pueden tratar los síntomas con medicamentos de venta libre. En casos graves, puede ser necesaria la hospitalización."
+      "treatment": "No existe un tratamiento específico para la enfermedad, pero se pueden tratar los síntomas con medicamentos de venta libre. En casos graves, puede ser necesaria la hospitalización.",
+      "policies":[
+        "123456789",
+        "000000000",
+        "15478488"
+        
+      ]
     },
     {
       "name": "Enfermedad 3",
@@ -129,7 +140,13 @@
         "Fiebre",
         "Erupciones cutáneas"
       ],
-      "treatment": "No existe una cura para la enfermedad, pero hay tratamientos disponibles que pueden ayudar a controlar los síntomas."
+      "treatment": "No existe una cura para la enfermedad, pero hay tratamientos disponibles que pueden ayudar a controlar los síntomas.",
+      "policies":[
+        "123456789",
+        "987654321",
+        "123456789"
+        
+      ]
     },
     {
       "name": "Enfermedad 4",
@@ -141,7 +158,10 @@
         "Mareos",
         "Náuseas"
       ],
-      "treatment": "El tratamiento depende de la gravedad de la enfermedad y puede incluir medicamentos, angioplastia o cirugía de bypass coronario."
+      "treatment": "El tratamiento depende de la gravedad de la enfermedad y puede incluir medicamentos, angioplastia o cirugía de bypass coronario.",
+      "policies":[
+        "987654321"
+      ]
     },
     {
       "name": "Enfermedad 5",
@@ -153,7 +173,9 @@
         "Problemas de visión",
         "Problemas de equilibrio"
       ],
-      "treatment": "El tratamiento depende del tipo y la gravedad del tumor y puede incluir cirugía, radioterapia y quimioterapia."
+      "treatment": "El tratamiento depende del tipo y la gravedad del tumor y puede incluir cirugía, radioterapia y quimioterapia.",
+      "policies":[
+      ]
     },
     {
       "name": "Enfermedad 6",
@@ -165,7 +187,12 @@
         "Desorganización del pensamiento",
         "Comportamiento desorganizado"
       ],
-      "treatment": "El tratamiento depende de la gravedad de la enfermedad y puede incluir medicamentos, terapia y hospitalización."
+      "treatment": "El tratamiento depende de la gravedad de la enfermedad y puede incluir medicamentos, terapia y hospitalización.",
+      "policies":[
+        "7859685",
+        "455258",
+        "000000000"
+      ]
     }
   ],
   "clinics": [
