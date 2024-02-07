@@ -10,6 +10,4 @@ import { RequesterDataComponent } from './components/requester-data/requester-da
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  
-}
+export class AppComponent {}
