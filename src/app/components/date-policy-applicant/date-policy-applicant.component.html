@@ -1,0 +1,36 @@
+<div>
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+            <mat-label>Seleccione su poliza</mat-label>
+            <mat-select>
+                @for (food of foods; track food) {
+                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+            <mat-label>Elegir paciente</mat-label>
+            <mat-select>
+                @for (food of foods; track food) {
+                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+            <mat-label>Elegir enfermedad / Sintoma</mat-label>
+            <mat-select>
+                @for (sicknes of sickness; track sicknes) {
+                <mat-option [value]="sicknes.id">{{sicknes.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+            <mat-label>Nombre centro clinico</mat-label>
+            <mat-select>
+                @for (clinica of clinicas; track clinica) {
+                <mat-option [value]="clinica.id">{{clinica.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

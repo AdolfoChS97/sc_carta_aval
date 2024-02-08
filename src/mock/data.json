@@ -96,6 +96,7 @@
   ],
   "sickness": [
     {
+      "id" : 1,
       "name": "Enfermedad 1",
       "description": "Es una enfermedad respiratoria contagiosa causada por un virus.",
       "symptoms": [
@@ -113,6 +114,7 @@
       ]
     },
     {
+      "id" : 1,
       "name": "Enfermedad 2",
       "description": "Es una enfermedad transmitida por mosquitos que puede causar fiebre alta, dolor de cabeza, dolores musculares y articulares, y erupciones cutáneas.",
       "symptoms": [
@@ -131,6 +133,7 @@
       ]
     },
     {
+      "id" : 1,
       "name": "Enfermedad 3",
       "description": "Es una enfermedad crónica que afecta el sistema inmunitario y puede causar una variedad de síntomas, incluyendo fatiga, dolor muscular y articular, fiebre y erupciones cutáneas.",
       "symptoms": [
@@ -149,6 +152,7 @@
       ]
     },
     {
+      "id" : 1,
       "name": "Enfermedad 4",
       "description": "Es una enfermedad cardíaca que ocurre cuando las arterias coronarias se estrechan o se bloquean, lo que reduce el flujo de sangre al corazón.",
       "symptoms": [
@@ -164,6 +168,7 @@
       ]
     },
     {
+      "id" : 1,
       "name": "Enfermedad 5",
       "description": "Es un tipo de cáncer que comienza en las células del cerebro o de la médula espinal.",
       "symptoms": [
@@ -178,6 +183,7 @@
       ]
     },
     {
+      "id" : 1,
       "name": "Enfermedad 6",
       "description": "Es una enfermedad mental que puede causar cambios en el estado de ánimo, el comportamiento y la percepción.",
       "symptoms": [
@@ -197,6 +203,7 @@
   ],
   "clinics": [
     {
+      "id" : "1",
       "name": "Clínica A",
       "policies" : [
         "15478488",
@@ -205,6 +212,7 @@
       ]
     },
     {
+      "id" : "2",
       "name": "Clínica B",
       "policies" : [
         "15478488",
@@ -212,6 +220,7 @@
       ]
     },
     {
+      "id" : "3",
       "name": "Clínica C",
       "policies" : [
         "000000000",
@@ -221,6 +230,7 @@
       ]
     },
     {
+      "id" : "4",
       "name": "Clínica D",
       "policies" : [
         "7859685",
@@ -229,6 +239,7 @@
 
     },
     {
+      "id" : "5",
       "name": "Clínica Maternidad San José",
       "policies" : [
         "45898544",
@@ -237,6 +248,7 @@
       ]
     },
     {
+      "id" : "6",
       "name": "Centro Médico Los Próceres",
       "policies" : [
         "15478488",
@@ -245,12 +257,14 @@
       ]
     },
     {
+      "id" : "7",
       "name": "Hospital Dr. Rafael Belloso Chacín",
       "policies" : [
         "15478488"
       ]
     },
     {
+      "id" : "8",
       "name": "Clínica La Sagrada Familia",
       "policies" : [
         "15478488",
