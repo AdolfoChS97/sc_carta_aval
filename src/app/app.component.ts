@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RequesterDataComponent } from './components/requester-data/requester-data.component';
 import { DatePolicyApplicantComponent } from './components/date-policy-applicant/date-policy-applicant.component';
+import { AditionalRequirementsComponent } from './components/aditional-requirements/aditional-requirements.component'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { DatePolicyApplicantComponent } from './components/date-policy-applicant
     CommonModule, 
     RouterOutlet, 
     RequesterDataComponent,
-    DatePolicyApplicantComponent
+    DatePolicyApplicantComponent,
+    AditionalRequirementsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
