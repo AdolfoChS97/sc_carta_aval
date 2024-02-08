@@ -1,0 +1,24 @@
+/* .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    margin: 0 10px;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+ */
+
+ .container {
+    margin: 23px;
+}
+
+
+
