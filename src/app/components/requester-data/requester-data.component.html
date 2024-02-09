@@ -4,16 +4,19 @@
       <h3>Datos solicitante</h3>
     </div>
     <div fxLayout="row">
-      <form [formGroup]="form">
-        <mat-form-field class="mr-1" appearance="outline">
+      <form [formGroup]="form" fxFlex="50">
+        <mat-form-field  fxFlex="50" class="mr-1" appearance="outline">
           <mat-label>Cédula</mat-label>
           <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id" (keyup)="onKeyUp($event)">
           <!-- <mat-hint *ngIf="form.get('id')?.hasError('pattern')">{{ form.get('id')?.hasError('pattern') | json }}</mat-hint> -->
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field  fxFlex="50" appearance="outline">
           <mat-label>Nombre</mat-label>
           <input type="text" matInput formControlName="name">
         </mat-form-field>
       </form>
+    </div>
+    <div fxLayout="row">
+
     </div>
 </div>

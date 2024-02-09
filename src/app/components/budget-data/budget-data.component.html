@@ -1,18 +1,21 @@
 <div fxLayout="column">
     <div fxLayout="row">
-        <form [formGroup]="form">
-            <mat-form-field class="mr-1" appearance="outline">
+        <form [formGroup]="form" fxFlex="50">
+            <mat-form-field  fxFlex="50" class="mr-1" appearance="outline">
                 <mat-label>
                     Número del presupuesto
                 </mat-label>
                 <input type="text" matInput formControlName="budgetId" placeholder="Inserte número de presupuesto">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field fxFlex="50" appearance="outline">
                 <mat-label>
                     Monto del presupuesto
                 </mat-label>
                 <input type="text" matInput formControlName="budgetAmount" placeholder="0000000">
             </mat-form-field>
         </form>
+    </div>
+    <div fxLayout="row">
+
     </div>
 </div>
