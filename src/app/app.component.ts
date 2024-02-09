@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { RequesterDataComponent } from './components/requester-data/requester-data.component';
 import { DatePolicyApplicantComponent } from './components/date-policy-applicant/date-policy-applicant.component';
 import { AditionalRequirementsComponent } from './components/aditional-requirements/aditional-requirements.component'
+import { BudgetDataComponent } from './components/budget-data/budget-data.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { AditionalRequirementsComponent } from './components/aditional-requireme
     RouterOutlet, 
     RequesterDataComponent,
     DatePolicyApplicantComponent,
-    AditionalRequirementsComponent
+    AditionalRequirementsComponent,
+    BudgetDataComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
