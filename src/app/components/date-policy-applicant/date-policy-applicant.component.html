@@ -1,14 +1,19 @@
-<div fxFill>
-    <div fxLayout="column" fxLayoutAlign="space-around start">
-        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
-            <mat-label>Seleccione su poliza</mat-label>
+<div fxLayout="column">
+    <div fxLayout="row">
+        <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>Seleccione su póliza</mat-label>
             <mat-select>
                 @for (food of foods; track food) {
                 <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+    </div>
+    <div fxLayout="row" fxFlex="50"></div>
+</div>
+<div fxLayout="column">
+    <div fxLayout="row">
+        <mat-form-field fxFlex="50" appearance="outline">
             <mat-label>Elegir paciente</mat-label>
             <mat-select>
                 @for (food of foods; track food) {
@@ -16,7 +21,12 @@
                 }
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+    </div>
+    <div fxLayout="row" fxFlex="50"></div>
+</div>
+<div fxLayout="column">
+    <div fxLayout="row">
+        <mat-form-field fxFlex="50" appearance="outline">
             <mat-label>Elegir enfermedad / Sintoma</mat-label>
             <mat-select>
                 @for (sicknes of sickness; track sicknes) {
@@ -24,7 +34,12 @@
                 }
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="mr-2 selectPolicy" appearance="outline">
+    </div>
+    <div fxLayout="row" fxFlex="50"></div>
+</div>
+<div fxLayout="column">
+    <div fxLayout="row">
+        <mat-form-field fxFlex="50" appearance="outline">
             <mat-label>Nombre centro clinico</mat-label>
             <mat-select>
                 @for (clinica of clinicas; track clinica) {
@@ -33,4 +48,5 @@
             </mat-select>
         </mat-form-field>
     </div>
+    <div fxLayout="row" fxFlex="50"></div>
 </div>
