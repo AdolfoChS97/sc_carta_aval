@@ -6,6 +6,7 @@ import { DatePolicyApplicantComponent } from './components/date-policy-applicant
 import { AditionalRequirementsComponent } from './components/aditional-requirements/aditional-requirements.component'
 import { BudgetDataComponent } from './components/budget-data/budget-data.component';
 import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-breakdown.component';
+import { BudgetMedicalComponent } from './components/budget-medical/budget-medical.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-b
     DatePolicyApplicantComponent,
     AditionalRequirementsComponent,
     BudgetDataComponent,
-    BudgetBreakdownComponent
+    BudgetBreakdownComponent,
+    BudgetMedicalComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
