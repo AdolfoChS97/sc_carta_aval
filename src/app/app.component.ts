@@ -5,6 +5,7 @@ import { RequesterDataComponent } from './components/requester-data/requester-da
 import { DatePolicyApplicantComponent } from './components/date-policy-applicant/date-policy-applicant.component';
 import { AditionalRequirementsComponent } from './components/aditional-requirements/aditional-requirements.component'
 import { BudgetDataComponent } from './components/budget-data/budget-data.component';
+import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-breakdown.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { BudgetDataComponent } from './components/budget-data/budget-data.compon
     RequesterDataComponent,
     DatePolicyApplicantComponent,
     AditionalRequirementsComponent,
-    BudgetDataComponent
+    BudgetDataComponent,
+    BudgetBreakdownComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
