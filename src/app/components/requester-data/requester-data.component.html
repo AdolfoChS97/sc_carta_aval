@@ -5,12 +5,12 @@
     </div>
     <div fxLayout="row">
       <form [formGroup]="form" fxFlex="50">
-        <mat-form-field  fxFlex="50" class="mr-1" appearance="outline">
+        <mat-form-field  fxFlex="50" class="mr-1">
           <mat-label>Cédula</mat-label>
           <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id" (keyup)="onKeyUp($event)">
           <!-- <mat-hint *ngIf="form.get('id')?.hasError('pattern')">{{ form.get('id')?.hasError('pattern') | json }}</mat-hint> -->
         </mat-form-field>
-        <mat-form-field  fxFlex="50" appearance="outline">
+        <mat-form-field  fxFlex="50">
           <mat-label>Nombre</mat-label>
           <input type="text" matInput formControlName="name">
         </mat-form-field>
