@@ -1,20 +1,58 @@
 <div fxLayoutGap>
-    <div fxLayout="column" fxLayoutAlign="space-around">
+    <div fxLayout="column">
         <div fxLayout="row">
             <h3>Datos solicitante</h3>
         </div>
         <div fxLayout="row">
             <form [formGroup]="form" fxFlex="100">
-                <mat-form-field fxFlex="50" class="mr-1">
-                    <mat-label>Cédula</mat-label>
-                    <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
-                        (keyup)="onKeyUp($event)">
-                </mat-form-field>
-                <mat-form-field fxFlex="50">
-                    <mat-label>Nombre</mat-label>
-                    <input type="text" matInput formControlName="name">
-                    <mat-hint>Una vez ingresada una cédula, aparecera el nombre del titular.</mat-hint>
-                </mat-form-field>
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="50" class="mr-1">
+                        <mat-label>Cédula</mat-label>
+                        <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
+                            (keyup)="onKeyUp($event)">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput formControlName="name">
+                        <mat-hint>Una vez ingresada una cédula, aparecera el nombre del titular.</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field  fxFlex="50">
+                        <mat-label>Seleccione su póliza</mat-label>
+                        <mat-select>
+                            @for (food of foods; track food) {
+                            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50" >
+                        <mat-label>Elegir paciente</mat-label>
+                        <mat-select>
+                            @for (food of foods; track food) {
+                            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="50" >
+                        <mat-label>Elegir enfermedad / Sintoma</mat-label>
+                        <mat-select>
+                            @for (sicknes of sickness; track sicknes) {
+                            <mat-option [value]="sicknes.id">{{sicknes.name}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="50" >
+                        <mat-label>Nombre centro clinico</mat-label>
+                        <mat-select>
+                            @for (clinic of clinics; track clinic) {
+                            <mat-option [value]="clinic.id">{{clinic.name}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </form>
         </div>
     </div>
