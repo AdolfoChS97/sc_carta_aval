@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RequesterDataComponent } from './requester-data.component';
+import { EndorsementComponent } from './endorsement.component';
 
-describe('RequesterDataComponent', () => {
-  let component: RequesterDataComponent;
-  let fixture: ComponentFixture<RequesterDataComponent>;
+describe('EndorsementComponent', () => {
+  let component: EndorsementComponent;
+  let fixture: ComponentFixture<EndorsementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RequesterDataComponent]
+      imports: [EndorsementComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(RequesterDataComponent);
+    fixture = TestBed.createComponent(EndorsementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

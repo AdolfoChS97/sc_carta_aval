@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { RequesterDataComponent } from './components/requester-data/requester-data.component';
-import { DatePolicyApplicantComponent } from './components/date-policy-applicant/date-policy-applicant.component';
-import { AditionalRequirementsComponent } from './components/aditional-requirements/aditional-requirements.component'
-import { BudgetDataComponent } from './components/budget-data/budget-data.component';
+import { EndorsementComponent } from './components/endorsement/endorsement.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
 import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-breakdown.component';
 import { BudgetMedicalComponent } from './components/budget-medical/budget-medical.component';
 
@@ -13,13 +12,12 @@ import { BudgetMedicalComponent } from './components/budget-medical/budget-medic
   standalone: true,
   imports: [
     CommonModule, 
+    FlexLayoutModule,
     RouterOutlet, 
-    RequesterDataComponent,
-    DatePolicyApplicantComponent,
-    AditionalRequirementsComponent,
-    BudgetDataComponent,
-    BudgetBreakdownComponent,
-    BudgetMedicalComponent
+    EndorsementComponent,
+    BudgetBreakdownComponent, 
+    BudgetMedicalComponent,
+    MatDividerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
