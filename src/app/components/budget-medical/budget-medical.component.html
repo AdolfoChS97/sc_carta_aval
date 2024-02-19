@@ -1,11 +1,14 @@
 <div fxLayout="column">
     <div fxLayout="row">
+        <h2>Información adicional</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
         <button 
             type="button" 
             mat-raised-button 
             color="primary" 
             fxLayout="row" 
-            fxFlex="50"
+            fxFlex="40"
             fxLayoutAlign="center center"
         >
             <mat-icon> attach_file</mat-icon>
@@ -13,32 +16,31 @@
         </button>
         <input hidden #fileInput type="file" id="file">
     </div>
-    <div fxLayout="row" fxFlex="50">
-
-    </div>
     <br>
     <div fxLayout="row">
-        <form fxFlex="50">
-            <div fxLayout="column">
-                <mat-form-field fxFlex="100">
+        <form fxFlex="100">
+            <div fxLayout="row">
+                <mat-form-field fxFlex="50" class="mr-1">
                     <mat-label>
                         Informe médico con detalle del diagnóstico
                     </mat-label>
                     <input type="text" matInput placeholder="Vigencia menor a 10 días">
                 </mat-form-field>
-                <mat-form-field fxFlex="100">
+                <mat-form-field fxFlex="50">
                     <mat-label>
                         Presupuesto de la institucción clínica
                     </mat-label>
                     <input type="text" matInput placeholder="Vigencia menor a 10 días">
                 </mat-form-field>
-                <mat-form-field fxFlex="100">
+            </div>
+            <div fxLayout="row">
+                <mat-form-field fxFlex="50" class="mr-1">
                     <mat-label>
                         Resultado de estudios practicados
                     </mat-label>
                     <input type="text" matInput placeholder="Que verifiquen el diagnóstico realizado">
                 </mat-form-field>
-                <mat-form-field fxFlex="100">
+                <mat-form-field fxFlex="50">
                     <mat-label>
                         Resultado de exámenes practicados
                     </mat-label>
@@ -47,8 +49,4 @@
             </div>
         </form>
     </div>
-    <div fxLayout="row" fxFlex="50">
-
-    </div>
-    
 </div>

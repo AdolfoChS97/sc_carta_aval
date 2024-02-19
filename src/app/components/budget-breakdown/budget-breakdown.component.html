@@ -1,47 +1,28 @@
 <div fxLayout="column">
     <div fxLayaout="row">
-        <div>
-            <h3>Desglose del presupuesto</h3>
-        </div>
+        <h2>Desglose del presupuesto</h2>
     </div>
-    <div fxLayout="row" fxFlex="50"></div>
+    <div fxLayout="row">
+        <form [formGroup]="form" fxFlex="100">
+            <div fxLayout="row">
+                <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-label>Total gastos de clínica</mat-label>
+                    <input type="text" matInput formControlName="clinicExpenses">
+                    <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal clínica</a></mat-hint>
+                </mat-form-field>
+                <mat-form-field fxFlex="50" class="inputAdicional">
+                    <mat-label>Total gastos honorarios</mat-label>
+                    <input type="text" matInput formControlName="honoraryExpenses">
+                    <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal honorarios</a></mat-hint>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row">
+                <mat-form-field fxFlex="100" >
+                    <mat-label>Total de gastos</mat-label>
+                    <input type="text" matInput formControlName="totalExpenses">
+                    <mat-hint>Sumatoria</mat-hint>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
 </div>
-<form [formGroup]="form">
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <mat-form-field fxFlex="50" class="inputAdicional">
-                <mat-label>Total gastos de clínica</mat-label>
-                <input type="text" matInput formControlName="clinicExpenses">
-                <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal clínica</a></mat-hint>
-    
-            </mat-form-field>
-        </div>
-    
-        <div fxLayout="row" fxFlex="50"></div>
-    </div>
-    <div fxLayout="column">
-        <div fxLayout="row">
-           
-        </div>
-        <div fxLayout="row" fxFlex="50"></div>
-    </div>
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <mat-form-field fxFlex="50" class="inputAdicional">
-                <mat-label>Total gastos honorarios</mat-label>
-                <input type="text" matInput formControlName="honoraryExpenses">
-                <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal honorarios</a></mat-hint>
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxFlex="50"></div>
-    </div>
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <mat-form-field fxFlex="50" class="inputAdicional">
-                <mat-label>TOTAL DE GASTOS</mat-label>
-                <input type="text" matInput formControlName="totalExpenses">
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxFlex="50"></div>
-    </div>
-</form>
