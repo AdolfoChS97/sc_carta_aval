@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { SICKNESS } from '../../../mock/sickness';
 import { CLINICAS } from '../../../mock/clinic';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-endorsement',
@@ -17,7 +19,10 @@ import { CLINICAS } from '../../../mock/clinic';
     MatFormFieldModule, 
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
+    
   ],
+  providers : [provideNativeDateAdapter()],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
 })
@@ -30,9 +35,18 @@ export class EndorsementComponent {
     {value: 'tacos-2', viewValue: 'Tacos'},
   ];
 
+  telefono: any[] = [
+    {value: '0414' , viewValue: '0414'},
+    {value: '0424' , viewValue: '0424'},
+    {value: '0412' , viewValue: '0412'},
+    {value: '0416' , viewValue: '0416'},
+    {value: '0426' , viewValue: '0426'},
+  ]
+
+
   sickness = SICKNESS;
   clinics = CLINICAS;
-
+  
 
   constructor() {
     this.form.addControl('name', new FormControl(''));
