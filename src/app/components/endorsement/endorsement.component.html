@@ -79,17 +79,14 @@
                 </div>
 
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="100" class="mr-1">
                         <mat-label>E-mail</mat-label>
                         <input type="text" matInput >
                     </mat-form-field>
-                    <div fxFlex="50" class="mr-1">
-                       
-                    </div>
                 </div>
                 <div fxLayout="row">
                     <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Prefijo:</mat-label>
+                        <mat-label>Prefijo</mat-label>
                         <mat-select>
                             @for (telefono of telefono; track telefono) {
                             <mat-option [value]="telefono.value">{{telefono.viewValue}}</mat-option>
@@ -97,7 +94,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field fxFlex="50" class="inputAdicional mr-1" >
-                        <mat-label>Número de celular:</mat-label>
+                        <mat-label>Número de celular</mat-label>
                         <input type="text" matInput >
                     </mat-form-field>
                 </div>
