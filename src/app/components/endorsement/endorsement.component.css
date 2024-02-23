@@ -1,0 +1,10 @@
+.row-input{
+    align-items: center;
+    justify-content: center;
+}
+.titleModule{
+    justify-content: center !important;  
+}
+/* .mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label {
+    background: #4472c4;
+} */

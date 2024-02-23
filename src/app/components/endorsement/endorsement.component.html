@@ -1,33 +1,39 @@
 <div fxLayoutGap>
     <div fxLayout="column">
         <div fxLayout="row">
-            <h2>Datos solicitante</h2>
-        </div>
-        <div fxLayout="row">
             <form [formGroup]="form" fxFlex="100">
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Cédula</mat-label>
-                        <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
-                            (keyup)="onKeyUp($event)">
-                    </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Nombre</mat-label>
+                <h3>Datos del titular</h3>
+                <div fxLayout="row" class="row-input">
+                        <label class="mr-1" for="">Cédula: </label>
+                        <mat-form-field fxFlex="30" class="mr-1">
+                            <!-- <mat-label>Cédula</mat-label> -->
+                            <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
+                                (keyup)="onKeyUp($event)">
+                        </mat-form-field>
+                    <label class="mr-1" for="">Nombre y apellido:</label>
+                    <mat-form-field fxFlex="40" class="mr-1">      
                         <input type="text" matInput formControlName="name">
                         <mat-hint>Una vez ingresada una cédula, aparecera el nombre del titular.</mat-hint>
                     </mat-form-field>
                 </div>
-                <div fxLayout="row">
-                    <mat-form-field  fxFlex="50" class="mr-1">
-                        <mat-label>Seleccione su póliza</mat-label>
+
+      
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-3" for="">Seleccione su póliza</label>
+                    <mat-form-field  fxFlex="40" class="mr-1">      
+                        <!-- <mat-label>Seleccione su póliza</mat-label> -->
                         <mat-select>
                             @for (food of foods; track food) {
                             <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Elegir paciente</mat-label>
+
+                </div>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-5" for="">Elegir paciente</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <!-- <mat-label>Elegir paciente</mat-label> -->
                         <mat-select>
                             @for (food of foods; track food) {
                             <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
@@ -35,17 +41,21 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Elegir enfermedad / Sintoma</mat-label>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-1" for="">Elegir enfermedad / Sintoma</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <!-- <mat-label>Elegir enfermedad / Sintoma</mat-label> -->
                         <mat-select>
                             @for (sicknes of sickness; track sicknes) {
                             <mat-option [value]="sicknes.id">{{sicknes.name}}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>Nombre centro clinico</mat-label>
+                </div>
+                <div fxLayout="row" class="row-input"> 
+                    <label class="mr-1" for="">Nombre centro clinico</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <!-- <mat-label>Nombre centro clinico</mat-label> -->
                         <mat-select>
                             @for (clinic of clinics; track clinic) {
                             <mat-option [value]="clinic.id">{{clinic.name}}</mat-option>
@@ -53,39 +63,43 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="100" class="mr-1">
-                        <mat-label>Fecha de atención medica:</mat-label>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-1" for="">Fecha de atención medica:</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <!-- <mat-label>Fecha de atención medica:</mat-label> -->
                         <input matInput [matDatepicker]="picker">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                 </div>
-                
-                <div fxLayout="row">
-                    <mat-form-field  fxFlex="50" class="mr-1" >
-                        <mat-label>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-1" for="">Número del presupuesto</label>
+                    <mat-form-field  fxFlex="30" class="mr-1" >
+                        <!-- <mat-label>
                             Número del presupuesto
-                        </mat-label>
+                        </mat-label> -->
                         <input type="text" matInput placeholder="Inserte número de presupuesto">
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
-                        <mat-label>
+                    <label class="mr-1" for=""> Monto del presupuesto</label>
+                    <mat-form-field fxFlex="30" class="mr-1">
+                        <!-- <mat-label>
                             Monto del presupuesto
-                        </mat-label>
+                        </mat-label> -->
                         <input type="text" matInput placeholder="0000000">
                     </mat-form-field>
                 </div>
 
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="100" class="mr-1">
-                        <mat-label>E-mail</mat-label>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-4" for="">E-mail</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <!-- <mat-label>E-mail</mat-label> -->
                         <input type="text" matInput >
                     </mat-form-field>
                 </div>
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-4" for="">Teléfono celular</label>
+                    <mat-form-field fxFlex="10" class="mr-1">
                         <mat-label>Prefijo</mat-label>
                         <mat-select>
                             @for (telefono of telefono; track telefono) {
@@ -93,7 +107,7 @@
                             }
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="inputAdicional mr-1" >
+                    <mat-form-field fxFlex="40" class="inputAdicional mr-1" >
                         <mat-label>Número de celular</mat-label>
                         <input type="text" matInput >
                     </mat-form-field>
