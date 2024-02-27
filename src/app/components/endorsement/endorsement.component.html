@@ -44,13 +44,14 @@
                             }
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="25" class="mr-1">
+                        <mat-label>RIF</mat-label>
+                        <input type="text" matInput placeholder="Digitar RIF del centro clínico" >
+                    </mat-form-field>
+                    <mat-form-field fxFlex="25" class="mr-1">
                         <mat-label>Nombre centro clinico</mat-label>
-                        <mat-select>
-                            @for (clinic of clinics; track clinic) {
-                            <mat-option [value]="clinic.id">{{clinic.name}}</mat-option>
-                            }
-                        </mat-select>
+                        <input type="text" matInput disabled="true" placeholder="Centro clínico">
+                        <mat-hint>Al digitar el rif del centro clínico aparecerá el nombre acá de existir</mat-hint>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
