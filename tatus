@@ -1,0 +1,68 @@
+[33mcommit bea8b3ee0e13fdb1ce51a2e31768507ce0bbad93[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/aditional-requirements[m[33m, [m[1;31morigin/feat/aditional-requirements[m[33m)[m
+Author: Josue ortiz <ortizjd0036@gmail.com>
+Date:   Thu Feb 8 17:00:29 2024 -0400
+
+    feat: create component datos adicionales
+
+[33mcommit e8054606c01d252b6db51597004adb83714aee06[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Merge: 096c567 3c72af2
+Author: Adolfo Andres Chafardett Silva <adolfo1997a@gmail.com>
+Date:   Thu Feb 8 16:26:05 2024 +0000
+
+    Merge branch 'feat/date-poliza-solicitante' into 'dev'
+    
+    feat: add interface and mock of sickness and clinic, the front list with for...
+    
+    See merge request AdolfoCH/sc_carta_aval!7
+
+[33mcommit 3c72af22b158324790289b4e8b13c0d908c05d28[m
+Author: Adolfo Andres Chafardett Silva <adolfo1997a@gmail.com>
+Date:   Thu Feb 8 16:26:04 2024 +0000
+
+    feat: add interface and mock of sickness and clinic, the front list with for...
+
+[33mcommit 096c567715b86ef54d87b3581c67f319674ef9c8[m
+Merge: 5e87f8a 5be7dd7
+Author: Adolfo Andres Chafardett Silva <adolfo1997a@gmail.com>
+Date:   Tue Feb 6 21:45:55 2024 +0000
+
+    Merge branch 'feat/setup-json' into 'dev'
+    
+    Feat/setup json
+    
+    See merge request AdolfoCH/sc_carta_aval!4
+
+[33mcommit 5be7dd7afef6b38a59fe79c01e5db8084cc43cf2[m
+Author: Adolfo Andres Chafardett Silva <adolfo1997a@gmail.com>
+Date:   Tue Feb 6 21:45:55 2024 +0000
+
+    Feat/setup json
+
+[33mcommit 5e87f8ad0c519eaa4889dc0b6e1e75c2b7821ec5[m
+Merge: 06c7a2b 30f2c8f
+Author: Josue Ortiz <ortizjd0036@gmail.com>
+Date:   Tue Feb 6 15:57:09 2024 +0000
+
+    Merge branch 'feat/setup-bootstrap' into 'dev'
+    
+    feat: add ngbootstrap v5.3.2
+    
+    See merge request AdolfoCH/sc_carta_aval!3
+
+[33mcommit 30f2c8fd90da2c91114fdf92de191448e86987d2[m
+Author: Adolfo Chafardett <adolfo1997a@gmail.com>
+Date:   Tue Feb 6 11:51:32 2024 -0400
+
+    feat: add ngbootstrap v5.3.2
+
+[33mcommit 06c7a2b05b989ce52bdbb5188e8fe8f18b534bdd[m
+Author: Adolfo Chafardett <adolfo1997a@gmail.com>
+Date:   Mon Feb 5 20:05:23 2024 -0400
+
+    feat: add angular v-17
+
+[33mcommit 7410190cb2491b61214f6c9e57b3461147979f5e[m
+Author: Adolfo Andres Chafardett Silva <adolfo1997a@gmail.com>
+Date:   Wed Jan 10 23:59:53 2024 +0000
+
+    Initial commit
