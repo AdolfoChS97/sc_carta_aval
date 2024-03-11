@@ -89,7 +89,7 @@ export class EndorsementComponent {
       this.form.controls['name'].setValue(policies.get('name'));
     }
 
-    if(!policies.get('policies')) {
+    if(policies.get('policies')?.length == 0) {
       this.form.controls['policies'].setValue([]);
       this.form.controls['policies'].disable();
     } else {
