@@ -83,7 +83,7 @@ export class EndorsementComponent {
     const value = event?.target?.value as unknown as number;
     const policies = await this.policiesService.getPolicies(value);
     
-    if(!policies.get('name')) {
+    if(policies.get('name')?.length == 0) {
       this.form.controls['name'].setValue('Usuario no existe en el sistema');
     } else {
       this.form.controls['name'].setValue(policies.get('name'));
