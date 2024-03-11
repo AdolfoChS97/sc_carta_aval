@@ -5,9 +5,23 @@
 .titleModule{
     justify-content: center !important;  
 }
+h3.titleModule {
+    color: #2f54a4;
+    font-weight: 500;
+}
+
 .label-class {
     width: 20%;
+    color: #7030a0;
+    font-weight:500;
+    font-size: 16px;
 }
+hr.line-div {
+    height: 7px;
+    background: #4472c4;
+    border: 0;
+}
+
 /* .mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label {
     background: #4472c4;
 } */

@@ -2,3 +2,14 @@
     align-items: center;
     justify-content: center;
 }
+.titleModuleDesglose {
+    text-align: center;
+    justify-content: center;
+}
+
+.label-class {
+    width: 20%;
+    color: #7030a0;
+    font-weight:500;
+    font-size: 16px;
+}

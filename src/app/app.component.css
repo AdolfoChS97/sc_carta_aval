@@ -1,3 +1,11 @@
 .container {
     padding: 1.2rem;
 }
+.titleModule {
+    text-align: center;
+}
+hr.line-div {
+    height: 7px;
+    background: #4472c4;
+    border: 0;
+}

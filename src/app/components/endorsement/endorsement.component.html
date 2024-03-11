@@ -2,7 +2,7 @@
     <div fxLayout="column">
         <div fxLayout="row">
             <form [formGroup]="form" fxFlex="100">
-                <h3>Datos del titular</h3>
+                <h3 class="titleModule">Datos del titular</h3>
                 <div fxLayout="row" class="row-input">
                         <label class="mr-1 label-class" for="">Cédula: </label>
                         <mat-form-field fxFlex="30" class="mr-1">
@@ -11,12 +11,13 @@
                                 (keyup)="onKeyUp($event)">
                         </mat-form-field>
                     <label class="mr-1 label-class" for="">Nombre y apellido:</label>
-                    <mat-form-field fxFlex="40" class="mr-1 label-class">      
+                    <mat-form-field fxFlex="40" class="mr-1">      
                         <input type="text" matInput formControlName="name">@if(form.controls['id'].getRawValue() === '') {
                             <mat-hint>Una vez ingresada una cédula, aparecera el nombre del titular.</mat-hint>
                         }
                     </mat-form-field>
                 </div>
+                <hr class="line-div">
                 <div fxLayout="row" class="row-input">
                     <label class="mr-1 label-class" for="">Seleccione su póliza</label>
                     <mat-form-field  fxFlex="40" class="mr-1">      
