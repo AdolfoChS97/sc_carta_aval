@@ -64,38 +64,36 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="100" class="mr-1">
+                    
+                </div>
+                
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>Fecha de atención medica:</mat-label>
                         <input matInput [matDatepicker]="picker">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                </div>
-                
-                <div fxLayout="row">
-                    <mat-form-field  fxFlex="50" class="mr-1" >
+                    </mat-form-field>
+                    <mat-form-field  fxFlex="33" class="mr-1" >
                         <mat-label>
                             Número del presupuesto
                         </mat-label>
                         <input type="text" matInput placeholder="Inserte número de presupuesto">
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>
                             Monto del presupuesto
                         </mat-label>
                         <input type="text" matInput placeholder="0000000">
                     </mat-form-field>
                 </div>
-
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="100" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>E-mail</mat-label>
                         <input type="text" matInput >
                     </mat-form-field>
-                </div>
-                <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>Prefijo</mat-label>
                         <mat-select>
                             @for (telefono of telefono; track telefono) {
@@ -103,7 +101,7 @@
                             }
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="inputAdicional mr-1" >
+                    <mat-form-field fxFlex="33" class="inputAdicional mr-1" >
                         <mat-label>Número de celular</mat-label>
                         <input type="text" matInput >
                     </mat-form-field>
