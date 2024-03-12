@@ -57,11 +57,20 @@
                         <mat-label>RIF</mat-label>
                         <input type="text" matInput placeholder="Digitar RIF del centro clínico" >
                     </mat-form-field>
-                    <mat-form-field fxFlex="25" class="mr-1">
+                    <!-- <mat-form-field fxFlex="25" class="mr-1">
                         <mat-label>Nombre centro clinico</mat-label>
                         <input type="text" matInput disabled="true" placeholder="Centro clínico">
                         <mat-hint>Al digitar el rif del centro clínico aparecerá el nombre acá de existir</mat-hint>
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <!-- <mat-form-field fxFlex="25" class="mr-1">
+                        <mat-label>Nombre centro clinico</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="" matInput [matAutocomplete]="auto" formControlName="clinics"]>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            @for( clinic of form.controls['clinics'].getRawValue(); track form.controls['clinics']) {
+                                <mat-option [value]="clinic.name">{{clinic}}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field> -->
                 </div>
                 <div fxLayout="row">
                     

@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SICKNESS } from '../../../mock/sickness';
 import { CLINICAS } from '../../../mock/clinic';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
+import { ClinicsService } from '../../services/clinics.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-endorsement',
@@ -23,23 +27,21 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    
+    MatAutocompleteModule,
   ],
   providers : [
     provideNativeDateAdapter(),
     PoliciesService,
+    ClinicsService
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
 })
-export class EndorsementComponent {
-  // secureName = "";
-  // // numPoliza = [];
-  // // codPoliza = [];
+export class EndorsementComponent  implements OnInit {
+
 
   policiesActive = [];
   
-
 
 
   form: FormGroup = new FormGroup({});
@@ -66,6 +68,7 @@ export class EndorsementComponent {
 
   constructor(
     private policiesService : PoliciesService,
+    private clinicsService : ClinicsService
   ) {
     this.form.addControl('name', new FormControl(''));
     this.form.controls['name'].disable();
@@ -76,7 +79,24 @@ export class EndorsementComponent {
     this.form.addControl('policies', new FormControl([]));
     this.form.controls['policies'].disable();
     this.form.controls['policies'].addValidators([Validators.required])
+
+
+    this.form.addControl('clinics' , new FormControl([]));
+    this.form.controls['clinics'].disable();
+    this.form.controls['clinics'].addValidators([Validators.required])
   }
+
+
+  filteredOption: Observable<string[]> | undefined;
+
+  async ngOnInit() {
+    // this.clinicsService.getClinics();
+
+    const clinics = await this.clinicsService.getClinics();
+    console.log(clinics);
+  
+  }
+
 
   async onKeyUp(event: any) {
     event.preventDefault();
@@ -96,18 +116,7 @@ export class EndorsementComponent {
       this.form.controls['policies'].enable();
       this.form.controls['policies'].setValue(policies.get('policies'));
     }
-
-
-
-
-    // this.secureName = policies.get('name') ?? '';
-    
-
-    // let policiesActive = policies.get('policies');
-    
-    // for(const polices of policiesActive ?? []) {
-    //   console.log(polices);
-      
-    // }
   }
+
+
 } 
