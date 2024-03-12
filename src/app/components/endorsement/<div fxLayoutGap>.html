@@ -5,14 +5,14 @@
                 <h3 class="titleModule">Datos del titular</h3>
                 <div fxLayout="row" class="row-input">
                         <label class="mr-1 label-class" for="">Cédula: </label>
-                        <mat-form-field fxFlex="40" class="mr-1">
+                        <mat-form-field fxFlex="30" class="mr-1">
                             <!-- <mat-label>Cédula</mat-label> -->
                             <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
                                 (keyup)="onKeyUp($event)">
                         </mat-form-field>
                 </div>
-                <div fxLayout="row" class="row-input"> 
-                    <label class="mr-1 label-class" for="">Nombre y apellido:</label>
+                <div fxLayout="row" class="row-input">
+                    <label class="mr-1 label-class" for="">asdas y apellido:</label>
                     <mat-form-field fxFlex="40" class="mr-1">      
                         <input type="text" matInput formControlName="name">@if(form.controls['id'].getRawValue() === '') {
                             <mat-hint>Una vez ingresada una cédula, aparecera el nombre del titular.</mat-hint>
@@ -61,9 +61,10 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" class="row-input"> 
-                    <label class="mr-1 label-class" for="">Nombre centro clínico</label>
-                    <mat-form-field fxFlex="40" class="mr-1">
-
+                    <label class="mr-1 label-class" for="">Nombre centro clinico</label>
+                    <mat-form-field fxFlex="25" class="mr-1">
+                        <mat-label>Nombre centro clinico</mat-label>
+                        <!-- <input type="text" matInput disabled="true" placeholder="Centro clínico"> -->
                         <mat-select>
                             @for (clinic of form.controls['clinics'].getRawValue(); track form.controls['clinics']) {
                             <mat-option [value]="clinic">{{clinic}}</mat-option>
