@@ -82,7 +82,7 @@ export class EndorsementComponent  implements OnInit {
 
 
     this.form.addControl('clinics' , new FormControl([]));
-    this.form.controls['clinics'].disable();
+    this.form.controls['clinics'].enable();
     this.form.controls['clinics'].addValidators([Validators.required])
   }
 
@@ -90,11 +90,18 @@ export class EndorsementComponent  implements OnInit {
   filteredOption: Observable<string[]> | undefined;
 
   async ngOnInit() {
-    // this.clinicsService.getClinics();
 
     const clinics = await this.clinicsService.getClinics();
-    console.log(clinics);
-  
+    // console.log(clinics);
+    this.form.controls['clinics'].setValue(clinics);
+    
+    if(clinics.get('clinics')?.length == 0) {
+      this.form.controls['clinics'].setValue([]);
+      // this.form.controls['clinics'].disable();
+    }else{
+      // this.form.controls['clinics'].enable();
+      this.form.controls['clinics'].setValue(clinics.get('clinics'));
+    }
   }
 
 

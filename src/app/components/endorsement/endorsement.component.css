@@ -1,0 +1,19 @@
+.row-input{
+    align-items: center;
+    justify-content: center;
+}
+.titleModule{
+    justify-content: center !important;  
+}
+
+
+.label-class {
+    width: 20%;
+    font-size: 16px;
+    color: #000000DE;
+}
+hr.line-div {
+    height: 7px;
+    background: #4472c4;
+    border: 0;
+}
