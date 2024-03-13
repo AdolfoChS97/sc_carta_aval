@@ -63,20 +63,20 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+                <div fxLAyout="row" class="row-input">
+                    <label class="mr-1 label-class" for="">Estado centro clínico</label>
+                    <mat-form-field fxFlex="40" class="mr-1">
+                        <input type="text" matInput>
+                    </mat-form-field>
+                </div>
                 <div fxLayout="row" class="row-input">
                     <label class="mr-1 label-class" for="">Nombre centro clínico</label>
                     <mat-form-field fxFlex="40" class="mr-1">
-                        <!-- 
-                        <mat-select>
-                            @for (clinic of form.controls['clinics'].getRawValue(); track form.controls['clinics']) {
-                            <mat-option [value]="clinic">{{clinic}}</mat-option>
-                            }
-                        </mat-select>
-                        <mat-hint>Al digitar el rif del centro clínico aparecerá el nombre acá de existir</mat-hint> -->
                         <input type="text" aria-label="Number" matInput 
-                            [matAutocomplete]="auto">
+                            [formControl]="suggests"
+                            [matAutocomplete]="auto" >
                         <mat-autocomplete #auto="matAutocomplete">
-                            @for (clinic of form.controls['clinics'].getRawValue(); track form.controls['clinics']) {
+                            @for (clinic of filteredOption | async; track clinic) {
                             <mat-option [value]="clinic">{{clinic}}</mat-option>
                             }
                         </mat-autocomplete>
