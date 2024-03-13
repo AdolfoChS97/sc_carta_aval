@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
 import { ClinicsService } from '../../services/clinics.service';
+import { IllnessesService } from '../../services/illnesses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, map, startWith } from 'rxjs';
 
@@ -33,7 +34,8 @@ import { Observable, map, startWith } from 'rxjs';
   providers : [
     provideNativeDateAdapter(),
     PoliciesService,
-    ClinicsService
+    ClinicsService,
+    IllnessesService
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
@@ -41,6 +43,7 @@ import { Observable, map, startWith } from 'rxjs';
 export class EndorsementComponent  implements OnInit {
 
   suggests = new FormControl('') as FormControl<string>;
+  suggestsIllness = new FormControl('') as FormControl<string>;
   form: FormGroup = new FormGroup({});
 
   foods: any[] = [
@@ -65,7 +68,8 @@ export class EndorsementComponent  implements OnInit {
 
   constructor(
     private policiesService : PoliciesService,
-    private clinicsService : ClinicsService
+    private clinicsService : ClinicsService,
+    private illnessService : IllnessesService
   ) {
     this.form.addControl('name', new FormControl(''));
     this.form.controls['name'].disable();
@@ -81,11 +85,16 @@ export class EndorsementComponent  implements OnInit {
     this.form.addControl('clinics' , new FormControl([]));
     this.form.controls['clinics'].disable();
     this.form.controls['clinics'].addValidators([Validators.required])
+
+    this.form.addControl('illness', new FormControl(''));
+    this.form.controls['illness'].disable();
+    this.form.controls['illness'].addValidators([Validators.required])
   }
 
 
-  filteredOption: Observable<string[]> | undefined;
 
+
+  filteredOption: Observable<string[]> | undefined;
 
   async ngOnInit() {
 
@@ -107,7 +116,7 @@ export class EndorsementComponent  implements OnInit {
     return this.form.controls['clinics'].getRawValue().filter((clinic: string) => clinic?.toLowerCase().includes(filterValue));
   }
 
-  async onKeyUp(event: any) {
+  async onKeyUpTypeId(event: any) {
     event.preventDefault();
     const value = event?.target?.value as unknown as number;
     const policies = await this.policiesService.getPolicies(value);
@@ -126,6 +135,13 @@ export class EndorsementComponent  implements OnInit {
       this.form.controls['policies'].setValue(policies.get('policies'));
     }
   }
+  async onKeyUpIllness(event: any) {
+    event.preventDefault();
+    const description = event?.target?.value as unknown as string;
+    const illnesses = await this.illnessService.getIllnesses(description);
+    console.log(illnesses.data);
+  }  
+
 
 
 } 
