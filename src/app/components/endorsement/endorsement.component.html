@@ -59,7 +59,15 @@
                     </mat-form-field>
                     <mat-form-field fxFlex="25" class="mr-1">
                         <mat-label>Nombre centro clinico</mat-label>
-                        <input type="text" matInput disabled="true" placeholder="Centro clínico">
+                        <input type="text" aria-label="Number" matInput 
+                            [formControl]="suggests"
+                            [matAutocomplete]="auto" >
+                            <mat-autocomplete #auto="matAutocomplete">
+                                @for (clinic of filteredOption | async; track clinic) {
+                                <mat-option [value]="clinic">{{clinic}}</mat-option>
+                                }
+                            </mat-autocomplete>
+    
                         <mat-hint>Al digitar el rif del centro clínico aparecerá el nombre acá de existir</mat-hint>
                     </mat-form-field>
                 </div>

@@ -1,20 +1,25 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SICKNESS } from '../../../mock/sickness';
-import { CLINICAS } from '../../../mock/clinic';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
+import { ClinicsService } from '../../services/clinics.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable, map, startWith } from 'rxjs';
+
 
 @Component({
   selector: 'app-endorsement',
   standalone: true,
   imports: [
+    CommonModule,
     FlexLayoutModule,
     FormsModule, 
     HttpClientModule,
@@ -23,25 +28,19 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    
+    MatAutocompleteModule,
   ],
   providers : [
     provideNativeDateAdapter(),
     PoliciesService,
+    ClinicsService
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
 })
-export class EndorsementComponent {
-  // secureName = "";
-  // // numPoliza = [];
-  // // codPoliza = [];
+export class EndorsementComponent  implements OnInit {
 
-  policiesActive = [];
-  
-
-
-
+  suggests = new FormControl('') as FormControl<string>;
   form: FormGroup = new FormGroup({});
 
   foods: any[] = [
@@ -61,11 +60,12 @@ export class EndorsementComponent {
 
 
   sickness = SICKNESS;
-  clinics = CLINICAS;
+
   
 
   constructor(
     private policiesService : PoliciesService,
+    private clinicsService : ClinicsService
   ) {
     this.form.addControl('name', new FormControl(''));
     this.form.controls['name'].disable();
@@ -76,6 +76,35 @@ export class EndorsementComponent {
     this.form.addControl('policies', new FormControl([]));
     this.form.controls['policies'].disable();
     this.form.controls['policies'].addValidators([Validators.required])
+
+
+    this.form.addControl('clinics' , new FormControl([]));
+    this.form.controls['clinics'].disable();
+    this.form.controls['clinics'].addValidators([Validators.required])
+  }
+
+
+  filteredOption: Observable<string[]> | undefined;
+
+
+  async ngOnInit() {
+
+    const clinics = await this.clinicsService.getClinics();
+
+    if(clinics.get('clinics')?.length > 1) {
+      this.form.controls['clinics'].enable();
+      this.form.controls['clinics'].setValue(clinics.get('clinics'));  
+    }
+
+    this.filteredOption = this.suggests?.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.form.controls['clinics'].getRawValue().filter((clinic: string) => clinic?.toLowerCase().includes(filterValue));
   }
 
   async onKeyUp(event: any) {
@@ -96,18 +125,7 @@ export class EndorsementComponent {
       this.form.controls['policies'].enable();
       this.form.controls['policies'].setValue(policies.get('policies'));
     }
-
-
-
-
-    // this.secureName = policies.get('name') ?? '';
-    
-
-    // let policiesActive = policies.get('policies');
-    
-    // for(const polices of policiesActive ?? []) {
-    //   console.log(polices);
-      
-    // }
   }
+
+
 } 
