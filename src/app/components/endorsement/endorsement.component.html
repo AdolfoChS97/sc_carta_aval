@@ -47,20 +47,16 @@
                 <div fxLayout="row">
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Elegir enfermedad / Sintoma</mat-label>
-                        <input type="text" aria-label="Number" matInput (keyup)="onKeyUpIllness($event)"
-                        
+                        <input type="text"  matInput (keyup)="onKeyUpIllness($event)"
+                        [formControl]="suggestsIllness"
+                        [matAutocomplete]="autoillness"
                         >
-                       <!-- <mat-autocomplete #auto="matAutocomplete">
-                            @for (illnes of form.controls['illness']; track form.controls['illness']) {
-                            <mat-option [value]="illnes">{{illnes}}</mat-option>
+                       <mat-autocomplete #autoillness="matAutocomplete">
+                            @for (illness of filteredIllness | async; track illness) {
+                            <mat-option [value]="illness">{{ illness }}</mat-option>
                             }
-                       </mat-autocomplete> -->
-                       
+                       </mat-autocomplete>
                     </mat-form-field>
-                    <!-- <mat-form-field fxFlex="25" class="mr-1">
-                        <mat-label>RIF</mat-label>
-                        <input type="text" matInput placeholder="Digitar RIF del centro clínico" >
-                    </mat-form-field> -->
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Nombre centro clinico</mat-label>
                         <input type="text" aria-label="Number" matInput 

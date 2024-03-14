@@ -14,6 +14,7 @@ import { ClinicsService } from '../../services/clinics.service';
 import { IllnessesService } from '../../services/illnesses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, map, startWith } from 'rxjs';
+import { _filter } from '../../utils/filter';
 
 
 @Component({
@@ -86,7 +87,7 @@ export class EndorsementComponent  implements OnInit {
     this.form.controls['clinics'].disable();
     this.form.controls['clinics'].addValidators([Validators.required])
 
-    this.form.addControl('illness', new FormControl(''));
+    this.form.addControl('illness', new FormControl([]));
     this.form.controls['illness'].disable();
     this.form.controls['illness'].addValidators([Validators.required])
   }
@@ -95,6 +96,7 @@ export class EndorsementComponent  implements OnInit {
 
 
   filteredOption: Observable<string[]> | undefined;
+  filteredIllness: Observable<any> | undefined;
 
   async ngOnInit() {
 
@@ -107,16 +109,11 @@ export class EndorsementComponent  implements OnInit {
 
     this.filteredOption = this.suggests?.valueChanges.pipe(
       startWith(''),
-      map((value: string) => this._filter(value || '')),
+      map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
     );
   }
 
-  private _filter(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.form.controls['clinics'].getRawValue().filter((clinic: string) => clinic?.toLowerCase().includes(filterValue));
-  }
-
-  async onKeyUpTypeId(event: any) {
+  async onKeyUpTypeId(event: any) { 
     event.preventDefault();
     const value = event?.target?.value as unknown as number;
     const policies = await this.policiesService.getPolicies(value);
@@ -139,9 +136,17 @@ export class EndorsementComponent  implements OnInit {
     event.preventDefault();
     const description = event?.target?.value as unknown as string;
     const illnesses = await this.illnessService.getIllnesses(description);
-    // console.log(illnesses);
-  }  
 
+    if(illnesses?.length > 1){
+      this.form.controls['illness'].enable();
+      this.form.controls['illness'].setValue(illnesses);
+    }
 
+    this.filteredIllness = this.suggestsIllness?.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
+    )      
+  }
+  
 
 } 
