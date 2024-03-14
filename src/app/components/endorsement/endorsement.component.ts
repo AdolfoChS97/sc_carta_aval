@@ -139,7 +139,7 @@ export class EndorsementComponent  implements OnInit {
     event.preventDefault();
     const description = event?.target?.value as unknown as string;
     const illnesses = await this.illnessService.getIllnesses(description);
-    console.log(illnesses.data);
+    // console.log(illnesses);
   }  
 
 

@@ -4,6 +4,8 @@ import { isReadable } from 'stream';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
+import { getIllnessesMapper } from '../mappers/illneses_mapper';
+import { GetIllnesResponse } from '../types/illneses';
 
 
 const {url , production} = environment;
@@ -18,9 +20,9 @@ export class IllnessesService {
   async getIllnesses(description: string):
   Promise<any> {
     const urlParams = new URLSearchParams([ ['description', description] ]);
-    const request$ = this.http.get(`${this.url}/backend-asegurados/src/modules/carta-aval/enfermedades.php?${urlParams.toString()}`).pipe(take(1));
+    const request$ = this.http.get<GetIllnesResponse>(`${this.url}/backend-asegurados/src/modules/carta-aval/enfermedades.php?${urlParams.toString()}`).pipe(take(1));
 
-    return await lastValueFrom(request$);
+    return await getIllnessesMapper(await lastValueFrom(request$));
   }
 
 }
