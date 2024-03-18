@@ -9,7 +9,7 @@
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Cédula</mat-label>
                         <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
-                            (keyup)="onKeyUp($event)">
+                            (keyup)="onKeyUpTypeId($event)">
                     </mat-form-field>
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Nombre</mat-label>
@@ -47,16 +47,16 @@
                 <div fxLayout="row">
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Elegir enfermedad / Sintoma</mat-label>
-                        <mat-select>
-                            @for (sicknes of sickness; track sicknes) {
-                            <mat-option [value]="sicknes.id">{{sicknes.name}}</mat-option>
+                        <input type="text"  matInput (keyup)="onKeyUpIllness($event)"
+                        [formControl]="suggestsIllness"
+                        [matAutocomplete]="autoillness"
+                        >
+                       <mat-autocomplete #autoillness="matAutocomplete">
+                            @for (illness of filteredIllness | async; track illness) {
+                            <mat-option [value]="illness">{{ illness }}</mat-option>
                             }
-                        </mat-select>
+                       </mat-autocomplete>
                     </mat-form-field>
-                    <!-- <mat-form-field fxFlex="25" class="mr-1">
-                        <mat-label>RIF</mat-label>
-                        <input type="text" matInput placeholder="Digitar RIF del centro clínico" >
-                    </mat-form-field> -->
                     <mat-form-field fxFlex="50" class="mr-1">
                         <mat-label>Nombre centro clinico</mat-label>
                         <input type="text" aria-label="Number" matInput 
