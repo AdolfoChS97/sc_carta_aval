@@ -14,9 +14,9 @@ export function getPoliciesByIdMapper(policies: GetPoliciesByIdResponse): Map<st
         }
 
         data?.forEach((value: Policies) => {
-            const { NUM_POLIZA, NOMBRE_TITULAR, APELLIDO_TITULAR, COD_POLIZA } = value
+            const { NUM_POLIZA, NOMBRE_TITULAR, APELLIDO_TITULAR, COD_POLIZA, ID_POLIZA } = value
             result.set('name', `${NOMBRE_TITULAR} ${APELLIDO_TITULAR}`);
-            result.set('policies', [...result.get('policies'), `${NUM_POLIZA}-${COD_POLIZA}`])
+            result.set('policies', [...result.get('policies'), `${ID_POLIZA}-${NUM_POLIZA}-${COD_POLIZA}`])
         })
 
         return result;
