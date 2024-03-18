@@ -15,6 +15,8 @@ import { IllnessesService } from '../../services/illnesses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, map, startWith } from 'rxjs';
 import { _filter } from '../../utils/filter';
+import { ThirdPartiesService } from '../../services/third-parties.service';
+import { ThirdParties } from '../../types/ThirdParty';
 
 
 @Component({
@@ -36,7 +38,8 @@ import { _filter } from '../../utils/filter';
     provideNativeDateAdapter(),
     PoliciesService,
     ClinicsService,
-    IllnessesService
+    IllnessesService,
+    ThirdPartiesService
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
@@ -44,9 +47,14 @@ import { _filter } from '../../utils/filter';
 export class EndorsementComponent  implements OnInit {
 
   policies: string[] | [] = [];
+  thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
   form: FormGroup = new FormGroup({});
+  filteredOption: Observable<string[]> | undefined;
+  filteredIllness: Observable<any> | undefined;
+
+
 
   foods: any[] = [
     {value: 'steak-0', viewValue: 'Steak'},
@@ -71,7 +79,8 @@ export class EndorsementComponent  implements OnInit {
   constructor(
     private policiesService : PoliciesService,
     private clinicsService : ClinicsService,
-    private illnessService : IllnessesService
+    private illnessService : IllnessesService,
+    private thirdPartiesService : ThirdPartiesService
   ) {
     this.form.addControl('name', new FormControl(''));
     this.form.controls['name'].disable();
@@ -91,13 +100,10 @@ export class EndorsementComponent  implements OnInit {
     this.form.addControl('illness', new FormControl([]));
     this.form.controls['illness'].disable();
     this.form.controls['illness'].addValidators([Validators.required])
+
+    this.form.addControl('thirdParty', new FormControl(''));
+    this.form.controls['thirdParty'].disable();
   }
-
-
-
-
-  filteredOption: Observable<string[]> | undefined;
-  filteredIllness: Observable<any> | undefined;
 
   async ngOnInit() {
 
@@ -115,10 +121,15 @@ export class EndorsementComponent  implements OnInit {
     );
   }
 
-  selectedPolicy(event: MatSelectChange) {
+  async selectedPolicy(event: MatSelectChange) {
     const { value } = event;
     this.form.controls['policy'].setValue(value);
-    console.log(value);
+    this.thirdParties = await this.thirdPartiesService.getThirdPartiesBy(value);
+    if(this.thirdParties?.length > 0) {
+      this.form.controls['thirdParty'].enable();
+    } else {
+      this.form.controls['thirdParty'].disable();
+    }
   }
 
   async onKeyUpTypeId(event: any) { 
@@ -130,6 +141,9 @@ export class EndorsementComponent  implements OnInit {
     
     if(!user) {
       this.form.controls['name'].setValue('Usuario no existe en el sistema');
+      this.form.controls['thirdParty'].disable();
+      this.form.controls['thirdParty'].setValue('');
+      this.thirdParties = [];
     } else {
       this.form.controls['name'].setValue(user);
     }

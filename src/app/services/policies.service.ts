@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, take } from 'rxjs';
 import { environment } from '../environments/environmet.dev';
 import { GetPoliciesByIdResponse } from '../types/Policies';
-import { getPoliciesByIdMapper } from '../mappers/policies';
+import { getPoliciesByIdMapper } from '../mappers/policies_mapper';
 
 const { url, production } = environment;
 
