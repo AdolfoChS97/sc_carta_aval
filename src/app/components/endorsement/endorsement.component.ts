@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SICKNESS } from '../../../mock/sickness';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -43,6 +43,7 @@ import { _filter } from '../../utils/filter';
 })
 export class EndorsementComponent  implements OnInit {
 
+  policies: string[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
   form: FormGroup = new FormGroup({});
@@ -78,9 +79,9 @@ export class EndorsementComponent  implements OnInit {
     this.form.addControl('id', new FormControl(''));
     this.form.controls['id'].addValidators([Validators.required])
 
-    this.form.addControl('policies', new FormControl([]));
-    this.form.controls['policies'].disable();
-    this.form.controls['policies'].addValidators([Validators.required])
+    this.form.addControl('policy', new FormControl([]));
+    this.form.controls['policy'].disable();
+    this.form.controls['policy'].addValidators([Validators.required])
 
 
     this.form.addControl('clinics' , new FormControl([]));
@@ -104,7 +105,8 @@ export class EndorsementComponent  implements OnInit {
 
     if(clinics.get('clinics')?.length > 1) {
       this.form.controls['clinics'].enable();
-      this.form.controls['clinics'].setValue(clinics.get('clinics'));  
+      this.form.controls['clinics'].
+      setValue(clinics.get('clinics'));  
     }
 
     this.filteredOption = this.suggests?.valueChanges.pipe(
@@ -113,23 +115,30 @@ export class EndorsementComponent  implements OnInit {
     );
   }
 
+  selectedPolicy(event: MatSelectChange) {
+    const { value } = event;
+    this.form.controls['policy'].setValue(value);
+    console.log(value);
+  }
+
   async onKeyUpTypeId(event: any) { 
     event.preventDefault();
     const value = event?.target?.value as unknown as number;
-    const policies = await this.policiesService.getPolicies(value);
+    const user = (await this.policiesService.getPolicies(value)).get('name') as unknown as string;
+    const policies = (await this.policiesService.getPolicies(value)).get('policies') as unknown as string[] | [];
+    this.policies = policies;
     
-    if(!policies.get('name')) {
+    if(!user) {
       this.form.controls['name'].setValue('Usuario no existe en el sistema');
     } else {
-      this.form.controls['name'].setValue(policies.get('name'));
+      this.form.controls['name'].setValue(user);
     }
 
-    if(policies.get('policies')?.length == 0) {
-      this.form.controls['policies'].setValue([]);
-      this.form.controls['policies'].disable();
+    if(policies?.length == 0) {
+      this.form.controls['policy'].setValue('');
+      this.form.controls['policy'].disable();
     } else {
-      this.form.controls['policies'].enable();
-      this.form.controls['policies'].setValue(policies.get('policies'));
+      this.form.controls['policy'].enable();
     }
   }
   async onKeyUpIllness(event: any) {

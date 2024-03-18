@@ -20,18 +20,21 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
-                    <mat-form-field  fxFlex="50" class="mr-1">
+                    <mat-form-field  fxFlex="50" class="mr-1"
+                    >
                         <mat-label>Seleccione su póliza</mat-label>
-                        <mat-select formControlName="policies">
-                            @for (policy of form.controls['policies'].getRawValue(); track form.controls['policies']) {
-                                <mat-option [value]="policy">{{policy}}</mat-option>
+                        <mat-select formControlName="policy" (selectionChange)="selectedPolicy($event)">
+                            @if(policies.length > 0) {
+                                @for (policy of policies; track policy) {
+                                    <mat-option [value]="policy">{{policy}}</mat-option>
+                                }
                             }
                         </mat-select>
-                        @if(form.controls['policies'].getRawValue()?.length === 0 && form.controls['id'].getRawValue() === '') {
+                        @if(policies.length === 0 && form.controls['id'].getRawValue() === '') {
                             <mat-hint>Una vez ingresada una cédula, aparecerán las polizas vinculadas al titular</mat-hint>
                         }
 
-                        @if(form.controls['policies'].getRawValue()?.length === 0 && form.controls['id'].getRawValue() !== '') {
+                        @if(policies.length === 0 && form.controls['id'].getRawValue() !== '') {
                             <mat-hint>Usuario no tiene pólizas</mat-hint>
                         }
                     </mat-form-field>
