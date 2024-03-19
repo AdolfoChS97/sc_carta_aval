@@ -15,7 +15,7 @@ export class ClinicsService {
   constructor(private http: HttpClient) { }
   
   async getClinics(): Promise<any> {
-    const request$ = this.http.get<GetClinicsResponse>(`${this.url}/backend-asegurados/src/modules/carta-aval/clinicas.php`).pipe(take(1));
+    const request$ = this.http.get<GetClinicsResponse>(`${this.url}/backend-asegurados/src/modules/carta-aval/clinicas.php`, { headers: { timeout: '20000' }  }).pipe(take(1));
     return await getClinicsMapper(await lastValueFrom(request$));
   }
   

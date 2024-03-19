@@ -106,19 +106,25 @@ export class EndorsementComponent  implements OnInit {
   }
 
   async ngOnInit() {
+    try {
+      const clinics = await this.clinicsService.getClinics();
 
-    const clinics = await this.clinicsService.getClinics();
+      if(clinics.get('clinics')?.length > 1) {
+        this.form.controls['clinics'].enable();
+        this.form.controls['clinics'].
+        setValue(clinics.get('clinics'));  
+      }
 
-    if(clinics.get('clinics')?.length > 1) {
-      this.form.controls['clinics'].enable();
-      this.form.controls['clinics'].
-      setValue(clinics.get('clinics'));  
+      this.filteredOption = this.suggests?.valueChanges.pipe(
+        startWith(''),
+        map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
+      );
+    } catch (e) {
+      this.suggests.disable();
+      this.form.controls['clinics'].disable();
+      this.form.controls['clinics'].setValue([]);
+
     }
-
-    this.filteredOption = this.suggests?.valueChanges.pipe(
-      startWith(''),
-      map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
-    );
   }
 
   async selectedPolicy(event: MatSelectChange) {
