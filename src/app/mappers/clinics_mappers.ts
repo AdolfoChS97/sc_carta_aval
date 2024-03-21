@@ -13,7 +13,7 @@ export function getClinicsMapper(clinics: GetClinicsResponse): any{
         data?.forEach((value: Clinics) => {
            const {NOMBRE , CIUDAD, ESTADO } = value
            result.set('name' , `${NOMBRE}, ${CIUDAD}, ${ESTADO}`);
-           result.set('clinics' , [...result.get('clinics'), `${NOMBRE} - ${ESTADO} -${CIUDAD}`])
+           result.set('clinics' , [...result.get('clinics'), `${NOMBRE} - ${ESTADO} - ${CIUDAD}`])
         })
         
         return result;
