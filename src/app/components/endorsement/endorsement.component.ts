@@ -46,6 +46,10 @@ import { ThirdParties } from '../../types/ThirdParty';
 })
 export class EndorsementComponent  implements OnInit {
 
+
+  codePhone = new FormControl('');
+  codeOption: string[] = ['One', 'Two', 'Three'];
+
   policies: string[] | [] = [];
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
@@ -56,6 +60,7 @@ export class EndorsementComponent  implements OnInit {
 
 
 
+
   foods: any[] = [
     {value: 'steak-0', viewValue: 'Steak'},
     {value: 'pizza-1', viewValue: 'Pizza'},
@@ -63,7 +68,7 @@ export class EndorsementComponent  implements OnInit {
   ];
  
 
-  telefono: any[] = [
+  phoneCode: any[] = [
     {value: '0414' , viewValue: '0414'},
     {value: '0424' , viewValue: '0424'},
     {value: '0412' , viewValue: '0412'},
@@ -103,6 +108,9 @@ export class EndorsementComponent  implements OnInit {
 
     this.form.addControl('thirdParty', new FormControl(''));
     this.form.controls['thirdParty'].disable();
+
+    this.form.addControl('telephone', new FormControl(''));
+    this.form.controls['telephone'].disable();
   }
 
   async ngOnInit() {
