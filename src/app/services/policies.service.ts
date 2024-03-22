@@ -18,6 +18,8 @@ export class PoliciesService {
       const urlParams = new URLSearchParams([ ['id', id.toString()], ['type_id', type_id] ]);
       const request$ = this.http.get<GetPoliciesByIdResponse>(`${this.url}/backend-asegurados/src/modules/carta-aval/polizas.php?${urlParams.toString()}`).pipe(take(1));
       return getPoliciesByIdMapper(await lastValueFrom(request$));
-  }
+      console.log(request$);
+    }
+ 
 }
  

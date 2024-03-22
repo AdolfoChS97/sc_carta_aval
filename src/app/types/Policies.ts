@@ -5,7 +5,9 @@ export type Policies = {
     APELLIDO_TITULAR: string,
     COD_POLIZA: string,
     NUM_POLIZA: string,
-    ID_POLIZA: string
+    ID_POLIZA: string,
+    EMAIL_TITULAR: string,
+    TELEFONO_TITULAR: string
 } 
 
 export type GetPoliciesByIdResponse = Response & {

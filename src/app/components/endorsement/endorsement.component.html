@@ -98,12 +98,12 @@
                 <div fxLayout="row">
                     <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>E-mail</mat-label>
-                        <input type="text" matInput>
+                        <input type="text" matInput formControlName="email"> 
                     </mat-form-field>
                     <mat-form-field fxFlex="67" class="mr-1">
                         <mat-label>Número de telefono</mat-label>
-                        <input type="text" placeholder="-Seleccione-" aria-label="Number" matInput [formControl]="codePhone"
-                            [matAutocomplete]="autoCodephone">
+                        <input type="text" placeholder="-Seleccione-" aria-label="Number" matInput formControlName="phone"
+                            [matAutocomplete]="autoCodephone" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                         <mat-autocomplete #autoCodephone="matAutocomplete">
                             @for (codes of phoneCode; track phoneCode) {
                             <!-- <mat-option [value]="phoneCode.value">{{phoneCode.viewValue}}</mat-option> -->
