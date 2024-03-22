@@ -46,35 +46,28 @@ import { ThirdParties } from '../../types/ThirdParty';
 })
 export class EndorsementComponent  implements OnInit {
 
+
+  codePhone = new FormControl('');
+  codeOption: string[] = ['One', 'Two', 'Three'];
+
   policies: string[] | [] = [];
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
+  phone = new FormControl('') as FormControl<string>;
+  email = new FormControl('') as FormControl<string>;
   form: FormGroup = new FormGroup({});
   filteredOption: Observable<string[]> | undefined;
   filteredIllness: Observable<any> | undefined;
 
 
-
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
- 
-
-  telefono: any[] = [
-    {value: '0414' , viewValue: '0414'},
-    {value: '0424' , viewValue: '0424'},
-    {value: '0412' , viewValue: '0412'},
-    {value: '0416' , viewValue: '0416'},
-    {value: '0426' , viewValue: '0426'},
+  phoneCode: any[] = [
+    {value: '0414-' , viewValue: '0414'},
+    {value: '0424-' , viewValue: '0424'},
+    {value: '0412-' , viewValue: '0412'},
+    {value: '0416-' , viewValue: '0416'},
+    {value: '0426-' , viewValue: '0426'},
   ]
-
-
-  sickness = SICKNESS;
-
-  
 
   constructor(
     private policiesService : PoliciesService,
@@ -86,7 +79,15 @@ export class EndorsementComponent  implements OnInit {
     this.form.controls['name'].disable();
 
     this.form.addControl('id', new FormControl(''));
-    this.form.controls['id'].addValidators([Validators.required])
+    this.form.controls['id'].addValidators([Validators.required]);
+
+    this.form.addControl('phone' , new FormControl(''));
+    this.form.controls['phone'].disable();
+    this.form.controls['phone'].addValidators([Validators.required]);
+
+    this.form.addControl('email' , new FormControl(''));
+    this.form.controls['email'].disable();
+    this.form.controls['email'].addValidators([Validators.required]);
 
     this.form.addControl('policy', new FormControl([]));
     this.form.controls['policy'].disable();
@@ -103,6 +104,9 @@ export class EndorsementComponent  implements OnInit {
 
     this.form.addControl('thirdParty', new FormControl(''));
     this.form.controls['thirdParty'].disable();
+
+    this.form.addControl('telephone', new FormControl(''));
+    this.form.controls['telephone'].disable();
   }
 
   async ngOnInit() {
@@ -142,8 +146,11 @@ export class EndorsementComponent  implements OnInit {
     event.preventDefault();
     const value = event?.target?.value as unknown as number;
     const user = (await this.policiesService.getPolicies(value)).get('name') as unknown as string;
+    const phoneUser = (await this.policiesService.getPolicies(value)).get('phone') as unknown as string;
+    const emailUser = (await this.policiesService.getPolicies(value)).get('email') as unknown as string;
     const policies = (await this.policiesService.getPolicies(value)).get('policies') as unknown as string[] | [];
     this.policies = policies;
+    
     
     if(!user) {
       this.form.controls['name'].setValue('Usuario no existe en el sistema');
@@ -160,6 +167,16 @@ export class EndorsementComponent  implements OnInit {
     } else {
       this.form.controls['policy'].enable();
     }
+
+    if(phoneUser){
+      this.form.controls['phone'].enable();
+      this.form.controls['phone'].setValue(phoneUser);
+    }
+    if(emailUser){
+      this.form.controls['email'].enable();
+      this.form.controls['email'].setValue(emailUser);
+    }
+
   }
   async onKeyUpIllness(event: any) {
     event.preventDefault();
@@ -176,6 +193,5 @@ export class EndorsementComponent  implements OnInit {
       map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
     )      
   }
-  
 
 } 
