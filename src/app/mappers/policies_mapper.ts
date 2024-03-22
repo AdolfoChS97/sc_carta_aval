@@ -21,13 +21,11 @@ export function getPoliciesByIdMapper(policies: GetPoliciesByIdResponse): Map<st
             result.set('policies', [...result.get('policies'), `${COD_POLIZA}${NUM_POLIZA}-${ID_POLIZA}`])
             result.set('phone', `${TELEFONO_TITULAR}`);
             result.set('email', `${EMAIL_TITULAR}`);
-            console.log(value);
         })
     
 
         return result;
     } catch (e) {
-        console.log('something happened', e);
         throw e;
     }
 }

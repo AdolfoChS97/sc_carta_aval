@@ -95,6 +95,10 @@
                         <input type="text" matInput placeholder="0000000">
                     </mat-form-field>
                 </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-label>¿Deseas actualizar datos adicionales?</mat-label>
+                    <mat-checkbox [checked]="checkbox" (change)="onCheckboxChange($event)"></mat-checkbox>
+                </div>
                 <div fxLayout="row">
                     <mat-form-field fxFlex="33" class="mr-1">
                         <mat-label>E-mail</mat-label>

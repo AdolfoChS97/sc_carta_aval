@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { SICKNESS } from '../../../mock/sickness';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
@@ -17,7 +16,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { _filter } from '../../utils/filter';
 import { ThirdPartiesService } from '../../services/third-parties.service';
 import { ThirdParties } from '../../types/ThirdParty';
-
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-endorsement',
@@ -33,6 +32,7 @@ import { ThirdParties } from '../../types/ThirdParty';
     MatSelectModule,
     MatDatepickerModule,
     MatAutocompleteModule,
+    MatCheckboxModule
   ],
   providers : [
     provideNativeDateAdapter(),
@@ -54,8 +54,8 @@ export class EndorsementComponent  implements OnInit {
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
-  phone = new FormControl('') as FormControl<string>;
-  email = new FormControl('') as FormControl<string>;
+  checkbox: boolean = false;
+
   form: FormGroup = new FormGroup({});
   filteredOption: Observable<string[]> | undefined;
   filteredIllness: Observable<any> | undefined;
@@ -104,9 +104,6 @@ export class EndorsementComponent  implements OnInit {
 
     this.form.addControl('thirdParty', new FormControl(''));
     this.form.controls['thirdParty'].disable();
-
-    this.form.addControl('telephone', new FormControl(''));
-    this.form.controls['telephone'].disable();
   }
 
   async ngOnInit() {
@@ -168,12 +165,8 @@ export class EndorsementComponent  implements OnInit {
       this.form.controls['policy'].enable();
     }
 
-    if(phoneUser){
-      this.form.controls['phone'].enable();
+    if(phoneUser && emailUser){
       this.form.controls['phone'].setValue(phoneUser);
-    }
-    if(emailUser){
-      this.form.controls['email'].enable();
       this.form.controls['email'].setValue(emailUser);
     }
 
@@ -192,6 +185,16 @@ export class EndorsementComponent  implements OnInit {
       startWith(''),
       map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
     )      
+  }
+
+  onCheckboxChange(event: MatCheckboxChange) {
+    if(event?.checked) {
+      this.form.controls['phone'].enable();
+      this.form.controls['email'].enable();
+    } else {
+      this.form.controls['phone'].disable();
+      this.form.controls['email'].disable();
+    }
   }
 
 } 
