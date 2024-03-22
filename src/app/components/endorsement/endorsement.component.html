@@ -6,12 +6,12 @@
         <div fxLayout="row">
             <form [formGroup]="form" fxFlex="100">
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Cédula</mat-label>
                         <input type="text" matInput placeholder="Ingrese su cédula" formControlName="id"
                             (keyup)="onKeyUpTypeId($event)">
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Nombre</mat-label>
                         <input type="text" matInput formControlName="name">
                         @if(form.controls['id'].getRawValue() === '') {
@@ -20,7 +20,7 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Seleccione su póliza</mat-label>
                         <mat-select formControlName="policy" (selectionChange)="selectedPolicy($event)">
                             @if(policies.length > 0) {
@@ -37,7 +37,7 @@
                         <mat-hint>Usuario no tiene pólizas</mat-hint>
                         }
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Elegir paciente</mat-label>
                         <mat-select formControlName="thirdParty">
                             @for (thirdParty of thirdParties; track thirdParty) {
@@ -47,7 +47,7 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Elegir enfermedad / Sintoma</mat-label>
                         <input type="text" matInput (keyup)="onKeyUpIllness($event)" [formControl]="suggestsIllness"
                             [matAutocomplete]="autoillness">
@@ -57,7 +57,7 @@
                             }
                         </mat-autocomplete>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" class="mr-1">
+                    <mat-form-field fxFlex="50" class="mr-1 mb-1">
                         <mat-label>Nombre centro clinico</mat-label>
                         <input type="text" aria-label="Clinicas" matInput [formControl]="suggests"
                             [matAutocomplete]="auto">
@@ -75,20 +75,20 @@
                 </div>
 
                 <div fxLayout="row">
-                    <mat-form-field fxFlex="33" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>Fecha de atención medica:</mat-label>
                         <input matInput [matDatepicker]="picker">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field fxFlex="33" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>
                             Número del presupuesto
                         </mat-label>
                         <input type="text" matInput placeholder="Inserte número de presupuesto">
                     </mat-form-field>
-                    <mat-form-field fxFlex="33" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>
                             Monto del presupuesto
                         </mat-label>
