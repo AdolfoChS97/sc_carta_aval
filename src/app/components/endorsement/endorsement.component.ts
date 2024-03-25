@@ -17,6 +17,9 @@ import { _filter } from '../../utils/filter';
 import { ThirdPartiesService } from '../../services/third-parties.service';
 import { ThirdParties } from '../../types/ThirdParty';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-endorsement',
@@ -32,7 +35,9 @@ import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox
     MatSelectModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers : [
     provideNativeDateAdapter(),
@@ -47,26 +52,35 @@ import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox
 export class EndorsementComponent  implements OnInit {
 
 
-  codePhone = new FormControl('');
-  codeOption: string[] = ['One', 'Two', 'Three'];
-
+  
   policies: string[] | [] = [];
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
   checkbox: boolean = false;
+  codePhone = new FormControl('');
 
   form: FormGroup = new FormGroup({});
   filteredOption: Observable<string[]> | undefined;
   filteredIllness: Observable<any> | undefined;
 
 
+  loaderillness: boolean = false;
+
+
+  foods: any[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
+ 
+
   phoneCode: any[] = [
-    {value: '0414-' , viewValue: '0414'},
-    {value: '0424-' , viewValue: '0424'},
-    {value: '0412-' , viewValue: '0412'},
-    {value: '0416-' , viewValue: '0416'},
-    {value: '0426-' , viewValue: '0426'},
+    {value: '0414' , viewValue: '0414'},
+    {value: '0424' , viewValue: '0424'},
+    {value: '0412' , viewValue: '0412'},
+    {value: '0416' , viewValue: '0416'},
+    {value: '0426' , viewValue: '0426'},
   ]
 
   constructor(
@@ -104,6 +118,9 @@ export class EndorsementComponent  implements OnInit {
 
     this.form.addControl('thirdParty', new FormControl(''));
     this.form.controls['thirdParty'].disable();
+
+    this.form.addControl('telephone', new FormControl(''));
+    this.form.controls['telephone'].disable();
   }
 
   async ngOnInit() {
@@ -120,6 +137,7 @@ export class EndorsementComponent  implements OnInit {
         startWith(''),
         map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
       );
+
     } catch (e) {
       this.suggests.disable();
       this.form.controls['clinics'].disable();
@@ -177,14 +195,16 @@ export class EndorsementComponent  implements OnInit {
     const illnesses = await this.illnessService.getIllnesses(description);
 
     if(illnesses?.length > 1){
+      this.loaderillness = true;
       this.form.controls['illness'].enable();
       this.form.controls['illness'].setValue(illnesses);
+     
     }
 
     this.filteredIllness = this.suggestsIllness?.valueChanges.pipe(
       startWith(''),
       map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
-    )      
+    )
   }
 
   onCheckboxChange(event: MatCheckboxChange) {
