@@ -65,14 +65,7 @@ export class EndorsementComponent  implements OnInit {
   filteredIllness: Observable<any> | undefined;
 
 
-  loaderillness: boolean = false;
 
-
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
  
 
   phoneCode: any[] = [
@@ -195,7 +188,6 @@ export class EndorsementComponent  implements OnInit {
     const illnesses = await this.illnessService.getIllnesses(description);
 
     if(illnesses?.length > 1){
-      this.loaderillness = true;
       this.form.controls['illness'].enable();
       this.form.controls['illness'].setValue(illnesses);
      
