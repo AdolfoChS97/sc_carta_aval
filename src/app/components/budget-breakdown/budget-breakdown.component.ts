@@ -17,8 +17,8 @@ export class BudgetBreakdownComponent{
 form :FormGroup = new FormGroup({})
 
 constructor(){
-  this.form.addControl('clinicExpenses' , new FormControl(0));
-  this.form.addControl('honoraryExpenses' , new FormControl(0));
+  this.form.addControl('clinicExpenses' , new FormControl());
+  this.form.addControl('honoraryExpenses' , new FormControl());
   this.form.addControl('totalExpenses' , new FormControl(0));
   this.form.controls['totalExpenses'].disable();
 }
@@ -33,7 +33,9 @@ constructor(){
 
 
   onkeyup(){
+    
     const v1: number = parseInt(this.form.controls['clinicExpenses'].value);
+    console.log(v1);
     const v2: number = parseInt(this.form.controls['honoraryExpenses'].value)
     const addition = (Number.isNaN(v1) ? 0 : v1) + (Number.isNaN(v2) ? 0 : v2);
     this.form.controls['totalExpenses'].setValue(`${addition.toLocaleString()} USD`); 
