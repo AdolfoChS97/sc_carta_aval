@@ -51,7 +51,6 @@
                         <mat-label>Elegir enfermedad / Sintoma</mat-label>
                         <input type="text" matInput (keyup)="onKeyUpIllness($event)" [formControl]="suggestsIllness"
                             [matAutocomplete]="autoillness">
-                            <mat-spinner *ngIf="loaderillness" class="spinner"></mat-spinner>
                         <mat-autocomplete #autoillness="matAutocomplete">
                             @for (illness of filteredIllness | async; track illness) {
                             <mat-option [value]="illness">{{ illness }}</mat-option>
@@ -83,7 +82,7 @@
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field fxFlex="33" class="mr-1">
+                    <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>
                             Número del presupuesto
                         </mat-label>
