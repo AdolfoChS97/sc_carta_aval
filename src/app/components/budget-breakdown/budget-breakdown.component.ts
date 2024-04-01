@@ -35,9 +35,8 @@ constructor(){
   onkeyup(){
     const v1: number = parseInt(this.form.controls['clinicExpenses'].value);
     const v2: number = parseInt(this.form.controls['honoraryExpenses'].value)
-    const addition = v1 + v2;
+    const addition = (Number.isNaN(v1) ? 0 : v1) + (Number.isNaN(v2) ? 0 : v2);
     this.form.controls['totalExpenses'].setValue(`${addition.toLocaleString()} USD`); 
-
   }
 
 
