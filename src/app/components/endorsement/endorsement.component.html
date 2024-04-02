@@ -25,7 +25,7 @@
                         <mat-select formControlName="policy" (selectionChange)="selectedPolicy($event)">
                             @if(policies.length > 0) {
                             @for (policy of policies; track policy) {
-                            <mat-option [value]="policy.split('-')[0]">{{policy}}</mat-option>
+                            <mat-option [value]="policy.slice(policy.indexOf('-'))">{{policy}}</mat-option>
                             }
                             }
                         </mat-select>
