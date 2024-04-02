@@ -57,8 +57,9 @@ export class EndorsementComponent  implements OnInit {
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
   suggestsIllness = new FormControl('') as FormControl<string>;
+  phone = new FormControl('') as FormControl<string>;
+  email = new FormControl('') as FormControl<string>;
   checkbox: boolean = false;
-  codePhone = new FormControl('');
 
   form: FormGroup = new FormGroup({});
   filteredOption: Observable<string[]> | undefined;
@@ -66,9 +67,7 @@ export class EndorsementComponent  implements OnInit {
 
 
 
- 
-
-  phoneCode: any[] = [
+  codePhone: any[] = [
     {value: '0414' , viewValue: '0414'},
     {value: '0424' , viewValue: '0424'},
     {value: '0412' , viewValue: '0412'},
@@ -88,6 +87,25 @@ export class EndorsementComponent  implements OnInit {
     this.form.addControl('id', new FormControl(''));
     this.form.controls['id'].addValidators([Validators.required]);
 
+    this.form.addControl('policy', new FormControl([]));
+    this.form.controls['policy'].disable();
+    this.form.controls['policy'].addValidators([Validators.required])
+
+    
+    this.form.addControl('illness', new FormControl([]));
+    this.form.controls['illness'].disable();
+    this.form.controls['illness'].addValidators([Validators.required]);
+
+    this.form.addControl('dateAtention' , new FormControl(''));
+    this.form.controls['dateAtention'].addValidators([Validators.required]);
+
+    this.form.addControl('budgetNumber' , new FormControl(''));
+    this.form.controls['budgetNumber'].addValidators([Validators.required]);
+
+    this.form.addControl('budgetAmount' , new FormControl(''));
+    this.form.controls['budgetAmount'].addValidators([Validators.required]);
+
+
     this.form.addControl('phone' , new FormControl(''));
     this.form.controls['phone'].disable();
     this.form.controls['phone'].addValidators([Validators.required]);
@@ -96,24 +114,16 @@ export class EndorsementComponent  implements OnInit {
     this.form.controls['email'].disable();
     this.form.controls['email'].addValidators([Validators.required]);
 
-    this.form.addControl('policy', new FormControl([]));
-    this.form.controls['policy'].disable();
-    this.form.controls['policy'].addValidators([Validators.required])
+  
 
 
     this.form.addControl('clinics' , new FormControl([]));
     this.form.controls['clinics'].disable();
     this.form.controls['clinics'].addValidators([Validators.required])
 
-    this.form.addControl('illness', new FormControl([]));
-    this.form.controls['illness'].disable();
-    this.form.controls['illness'].addValidators([Validators.required])
 
     this.form.addControl('thirdParty', new FormControl(''));
     this.form.controls['thirdParty'].disable();
-
-    this.form.addControl('telephone', new FormControl(''));
-    this.form.controls['telephone'].disable();
   }
 
   async ngOnInit() {
@@ -176,8 +186,10 @@ export class EndorsementComponent  implements OnInit {
       this.form.controls['policy'].enable();
     }
 
-    if(phoneUser && emailUser){
+    if(phoneUser){
       this.form.controls['phone'].setValue(phoneUser);
+    }
+    if(emailUser){
       this.form.controls['email'].setValue(emailUser);
     }
 
@@ -207,6 +219,13 @@ export class EndorsementComponent  implements OnInit {
       this.form.controls['phone'].disable();
       this.form.controls['email'].disable();
     }
+  }
+  numberPresupuesto(event: any, type: string): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;  
   }
 
 } 
