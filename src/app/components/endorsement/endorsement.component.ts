@@ -1,20 +1,31 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import { SICKNESS } from '../../../mock/sickness';
-import { CLINICAS } from '../../../mock/clinic';
+import {MatSelectChange, MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
+import { ClinicsService } from '../../services/clinics.service';
+import { IllnessesService } from '../../services/illnesses.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable, map, startWith } from 'rxjs';
+import { _filter } from '../../utils/filter';
+import { ThirdPartiesService } from '../../services/third-parties.service';
+import { ThirdParties } from '../../types/ThirdParty';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-endorsement',
   standalone: true,
   imports: [
+    CommonModule,
     FlexLayoutModule,
     FormsModule, 
     HttpClientModule,
@@ -23,35 +34,40 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers : [
     provideNativeDateAdapter(),
     PoliciesService,
+    ClinicsService,
+    IllnessesService,
+    ThirdPartiesService
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
 })
-export class EndorsementComponent {
-  // secureName = "";
-  // // numPoliza = [];
-  // // codPoliza = [];
+export class EndorsementComponent  implements OnInit {
 
-  policiesActive = [];
+
   
-
-
+  policies: string[] | [] = [];
+  thirdParties: ThirdParties[] | [] = [];
+  suggests = new FormControl('') as FormControl<string>;
+  suggestsIllness = new FormControl('') as FormControl<string>;
+  phone = new FormControl('') as FormControl<string>;
+  email = new FormControl('') as FormControl<string>;
+  checkbox: boolean = false;
 
   form: FormGroup = new FormGroup({});
+  filteredOption: Observable<string[]> | undefined;
+  filteredIllness: Observable<any> | undefined;
 
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
- 
 
-  telefono: any[] = [
+
+  codePhone: any[] = [
     {value: '0414' , viewValue: '0414'},
     {value: '0424' , viewValue: '0424'},
     {value: '0412' , viewValue: '0412'},
@@ -59,55 +75,157 @@ export class EndorsementComponent {
     {value: '0426' , viewValue: '0426'},
   ]
 
-
-  sickness = SICKNESS;
-  clinics = CLINICAS;
-  
-
   constructor(
     private policiesService : PoliciesService,
+    private clinicsService : ClinicsService,
+    private illnessService : IllnessesService,
+    private thirdPartiesService : ThirdPartiesService
   ) {
     this.form.addControl('name', new FormControl(''));
     this.form.controls['name'].disable();
 
     this.form.addControl('id', new FormControl(''));
-    this.form.controls['id'].addValidators([Validators.required])
+    this.form.controls['id'].addValidators([Validators.required]);
 
-    this.form.addControl('policies', new FormControl([]));
-    this.form.controls['policies'].disable();
-    this.form.controls['policies'].addValidators([Validators.required])
+    this.form.addControl('policy', new FormControl([]));
+    this.form.controls['policy'].disable();
+    this.form.controls['policy'].addValidators([Validators.required])
+
+    
+    this.form.addControl('illness', new FormControl([]));
+    this.form.controls['illness'].disable();
+    this.form.controls['illness'].addValidators([Validators.required]);
+
+    this.form.addControl('dateAtention' , new FormControl(''));
+    this.form.controls['dateAtention'].addValidators([Validators.required]);
+
+    this.form.addControl('budgetNumber' , new FormControl(''));
+    this.form.controls['budgetNumber'].addValidators([Validators.required]);
+
+    this.form.addControl('budgetAmount' , new FormControl(''));
+    this.form.controls['budgetAmount'].addValidators([Validators.required]);
+
+
+    this.form.addControl('phone' , new FormControl(''));
+    this.form.controls['phone'].disable();
+    this.form.controls['phone'].addValidators([Validators.required]);
+
+    this.form.addControl('email' , new FormControl(''));
+    this.form.controls['email'].disable();
+    this.form.controls['email'].addValidators([Validators.required]);
+
+  
+
+
+    this.form.addControl('clinics' , new FormControl([]));
+    this.form.controls['clinics'].disable();
+    this.form.controls['clinics'].addValidators([Validators.required])
+
+
+    this.form.addControl('thirdParty', new FormControl(''));
+    this.form.controls['thirdParty'].disable();
   }
 
-  async onKeyUp(event: any) {
+  async ngOnInit() {
+    try {
+      const clinics = await this.clinicsService.getClinics();
+
+      if(clinics.get('clinics')?.length > 1) {
+        this.form.controls['clinics'].enable();
+        this.form.controls['clinics'].
+        setValue(clinics.get('clinics'));  
+      }
+
+      this.filteredOption = this.suggests?.valueChanges.pipe(
+        startWith(''),
+        map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
+      );
+
+    } catch (e) {
+      this.suggests.disable();
+      this.form.controls['clinics'].disable();
+      this.form.controls['clinics'].setValue([]);
+
+    }
+  }
+
+  async selectedPolicy(event: MatSelectChange) {
+    const { value } = event;
+    this.form.controls['policy'].setValue(value);
+    this.thirdParties = await this.thirdPartiesService.getThirdPartiesBy(value);
+    if(this.thirdParties?.length > 0) {
+      this.form.controls['thirdParty'].enable();
+    } else {
+      this.form.controls['thirdParty'].disable();
+    }
+  }
+
+  async onKeyUpTypeId(event: any) { 
     event.preventDefault();
     const value = event?.target?.value as unknown as number;
-    const policies = await this.policiesService.getPolicies(value);
+    const user = (await this.policiesService.getPolicies(value)).get('name') as unknown as string;
+    const phoneUser = (await this.policiesService.getPolicies(value)).get('phone') as unknown as string;
+    const emailUser = (await this.policiesService.getPolicies(value)).get('email') as unknown as string;
+    const policies = (await this.policiesService.getPolicies(value)).get('policies') as unknown as string[] | [];
+    this.policies = policies;
     
-    if(!policies.get('name')) {
+    
+    if(!user) {
       this.form.controls['name'].setValue('Usuario no existe en el sistema');
+      this.form.controls['thirdParty'].disable();
+      this.form.controls['thirdParty'].setValue('');
+      this.thirdParties = [];
     } else {
-      this.form.controls['name'].setValue(policies.get('name'));
+      this.form.controls['name'].setValue(user);
     }
 
-    if(policies.get('policies')?.length == 0) {
-      this.form.controls['policies'].setValue([]);
-      this.form.controls['policies'].disable();
+    if(policies?.length == 0) {
+      this.form.controls['policy'].setValue('');
+      this.form.controls['policy'].disable();
     } else {
-      this.form.controls['policies'].enable();
-      this.form.controls['policies'].setValue(policies.get('policies'));
+      this.form.controls['policy'].enable();
     }
 
+    if(phoneUser){
+      this.form.controls['phone'].setValue(phoneUser);
+    }
+    if(emailUser){
+      this.form.controls['email'].setValue(emailUser);
+    }
 
-
-
-    // this.secureName = policies.get('name') ?? '';
-    
-
-    // let policiesActive = policies.get('policies');
-    
-    // for(const polices of policiesActive ?? []) {
-    //   console.log(polices);
-      
-    // }
   }
+  async onKeyUpIllness(event: any) {
+    event.preventDefault();
+    const description = event?.target?.value as unknown as string;
+    const illnesses = await this.illnessService.getIllnesses(description);
+
+    if(illnesses?.length > 1){
+      this.form.controls['illness'].enable();
+      this.form.controls['illness'].setValue(illnesses);
+     
+    }
+
+    this.filteredIllness = this.suggestsIllness?.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
+    )
+  }
+
+  onCheckboxChange(event: MatCheckboxChange) {
+    if(event?.checked) {
+      this.form.controls['phone'].enable();
+      this.form.controls['email'].enable();
+    } else {
+      this.form.controls['phone'].disable();
+      this.form.controls['email'].disable();
+    }
+  }
+  numberPresupuesto(event: any, type: string): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;  
+  }
+
 } 

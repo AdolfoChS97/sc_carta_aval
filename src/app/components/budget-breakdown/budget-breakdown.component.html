@@ -7,12 +7,12 @@
             <div fxLayout="row">
                 <mat-form-field fxFlex="33" class="mr-1">
                     <mat-label>Total gastos de clínica</mat-label>
-                    <input type="text" matInput formControlName="clinicExpenses">
+                    <input type="text" matInput formControlName="clinicExpenses" (keyup)="onkeyup()"  (keypress)="numberOnly($event, 'clinicExpenses')">
                     <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal clínica</a></mat-hint>
                 </mat-form-field>
                 <mat-form-field fxFlex="33" class="mr-1">
                     <mat-label>Total gastos honorarios</mat-label>
-                    <input type="text" matInput formControlName="honoraryExpenses">
+                    <input type="text" matInput formControlName="honoraryExpenses"  (keyup)="onkeyup()"  (keypress)="numberOnly($event, 'honoraryExpenses')">
                     <mat-hint align="start"> <a  href="https://www.google.com/" target="_blank">Ver en presupuesto subtotal honorarios</a></mat-hint>
                 </mat-form-field>
                 <mat-form-field fxFlex="33" >
