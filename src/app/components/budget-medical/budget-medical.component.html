@@ -2,49 +2,18 @@
     <div fxLayout="row">
         <h2>Información adicional</h2>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <button type="button" mat-raised-button color="primary" fxLayout="row" fxFlex="40"
-            fxLayoutAlign="center center">
+    <div fxLayout="row">
+        <h3>Adjunte los recaudos de su expediente</h3>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <button type="button" mat-raised-button color="primary" fxLayout="row" fxFlex="100"
+            fxLayoutAlign="center center" 
+            (click)="fileInput.click()"    
+        >
             <mat-icon> attach_file</mat-icon>
             Adjuntar recaudos
         </button>
-        <input hidden #fileInput type="file" id="file">
+        <input hidden #fileInput multiple="true" type="file" id="file" (change)="onFileSelected($event)">
     </div>
     <br>
-    <!-- <div fxLayout="row">
-        <form fxFlex="100">
-            <div fxLayout="row">
-
-                <button type="button" mat-raised-button color="primary" fxLayout="row" class="mr-1" fxFlex="50"
-                    fxLayoutAlign="center center">
-                    <mat-icon> attach_file</mat-icon>
-                    Informe médico con detalle del diagnóstico
-                    <input hidden #fileInput type="file" id="fileDiagnosis">
-                </button>
-                <button type="button" mat-raised-button color="primary" fxLayout="row" class="mr-1" fxFlex="50"
-                fxLayoutAlign="center center">
-                <mat-icon> attach_file</mat-icon>
-                Presupuesto de la institucción clínica
-                <input hidden #fileInput type="file" id="fileBudget">
-            </button>
-
-            </div>
-            <br>
-            <div fxLayout="row">
-
-                <button type="button" mat-raised-button color="primary" fxLayout="row" class="mr-1" fxFlex="50"
-                    fxLayoutAlign="center center">
-                    <mat-icon> attach_file</mat-icon>
-                    Resultado de estudios practicados
-                    <input hidden #fileInput type="file" id="fileStudies">
-                </button>
-                <button type="button" mat-raised-button color="primary" fxLayout="row" class="mr-1" fxFlex="50"
-                fxLayoutAlign="center center">
-                <mat-icon> attach_file</mat-icon>
-                Resultado de exámenes practicados
-                <input hidden #fileInput type="file" id="fileExam">
-            </button>
-            </div>
-        </form>
-    </div> -->
 </div>

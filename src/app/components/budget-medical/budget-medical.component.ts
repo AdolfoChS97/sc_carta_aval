@@ -24,4 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class BudgetMedicalComponent {
 
+  onFileSelected(event: any) {
+    const files: FileList = event.target.files;
+    console.log(files);
+  }
 }
