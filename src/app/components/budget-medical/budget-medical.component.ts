@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatOption, MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 
 @Component({
@@ -19,7 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule
   ],
   templateUrl: './budget-medical.component.html',
   styleUrl: './budget-medical.component.css'
@@ -34,6 +36,10 @@ export class BudgetMedicalComponent {
     { id: 4, name: 'Resultado de exámenes practicos' },
     { id: 5, name: 'Otros' }
   ];
+  @ViewChild('docs') docsSelect: MatSelect | undefined;
+  @ViewChild('types') typesSelect: MatSelect | undefined;
+  pairs: any[] = [];
+  
 
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
@@ -45,10 +51,20 @@ export class BudgetMedicalComponent {
       }
       this.documents.push(file);
     }
-    console.log(this.documents);
-  }
+  };
 
   isPdf(file: File) {
     return file.type === 'application/pdf';
-  }
+  };
+
+
+  pairDoc(){
+    const document: File = this.documents[this.docsSelect?.value];
+    const type = this.typeDocuments[this.typesSelect?.value];
+
+    
+    this.documents.splice(this.docsSelect?.value, this.docsSelect?.value + 1);    
+    this.pairs.push([type.name, document]);
+  };
+
 }

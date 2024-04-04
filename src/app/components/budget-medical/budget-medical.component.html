@@ -18,7 +18,7 @@
     <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
         <mat-form-field fxFlex="30" class="mr-1">
             <mat-label>Recaudos</mat-label>
-            <mat-select>
+            <mat-select #docs>
                 <mat-option value="0" disabled>Seleccione su recaudo</mat-option>
                 @for(document of documents; track document; let idx = $index) {
                 <mat-option value="{{ idx }}">{{ document.name }}</mat-option>
@@ -27,13 +27,22 @@
         </mat-form-field>
         <mat-form-field fxFlex="30">
             <mat-label>Tipo de documento</mat-label>
-            <mat-select>
+            <mat-select #types>
                 @for(doc of typeDocuments; track doc) {
-                <mat-option value="{{ doc.id }}">{{ doc.name }}</mat-option>
+                <mat-option  value="{{ doc.id }}">{{ doc.name }}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-        <button type="button" mat-raised-button color="primary" fxFlex="30">Consolidar</button>
+        <button (click)="pairDoc()" type="button" mat-raised-button color="primary" fxFlex="30">Consolidar</button>
+    </div>
+    }
+    @if(pairs.length > 0){
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <mat-list role="list">
+        @for(pair of pairs; track pair) {
+            <mat-list-item role="listitem">{{ pair[0] }}: {{ pair[1].name }}</mat-list-item>
+        }
+    </mat-list>
     </div>
     }
 </div>
