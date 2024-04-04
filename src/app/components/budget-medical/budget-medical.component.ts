@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
 
 
 @Component({
@@ -21,7 +22,8 @@ import { MatListModule } from '@angular/material/list';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   templateUrl: './budget-medical.component.html',
   styleUrl: './budget-medical.component.css'
@@ -39,6 +41,8 @@ export class BudgetMedicalComponent {
   @ViewChild('docs') docsSelect: MatSelect | undefined;
   @ViewChild('types') typesSelect: MatSelect | undefined;
   pairs: any[] = [];
+  dataSource = this.pairs ;
+  displayedColumns = ["tipoRecaudo", "documentoAsignado"];
   
 
   onFileSelected(event: any) {
@@ -64,7 +68,10 @@ export class BudgetMedicalComponent {
 
     
     this.documents.splice(this.docsSelect?.value, this.docsSelect?.value + 1);    
-    this.pairs.push([type.name, document]);
+    this.pairs.push([type.name, document.name]);
+
+    console.log(this.dataSource);
+  
   };
 
 }
