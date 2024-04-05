@@ -28,6 +28,7 @@
         <mat-form-field fxFlex="30">
             <mat-label>Tipo de documento</mat-label>
             <mat-select #types>
+                <mat-option value="0" disabled>Seleccione su tipo de docucumento</mat-option>
                 @for(doc of typeDocuments; track doc) {
                 <mat-option  value="{{ doc.id }}">{{ doc.name }}</mat-option>
                 }
@@ -37,28 +38,39 @@
     </div>
     }
     @if(pairs.length > 0){
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
-        <!-- <mat-list role="list">
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <mat-list role="list">
         @for(pair of pairs; track pair) {
             <mat-list-item role="listitem">{{ pair[0] }}: {{ pair[1].name }}</mat-list-item>
             }
-        </mat-list> -->
+        </mat-list>
+    </div> -->
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <table class="tableDocument">
+            <tr>
+                <th>Tipo de recaudo</th>
+                <th>Documento asignado</th>
+                <th>Acciones</th>
+            </tr>
+            @for(pair of pairs; track pair) {
+            <tr>
+                <td>{{ pair[0] }}</td>
+                <td>{{ pair[1].name }}</td>
+                <td>
+                    <button mat-icon-button aria-label="edit icon-button with edit icon">
+                        <mat-icon class="edit-icon">edit</mat-icon>
+                      </button>
+                      <button mat-icon-button aria-label="edit icon-button with edit icon">
+                        <mat-icon class="deletd-icon">delete</mat-icon>
+                      </button>
+                </td>
+            </tr>
+        }
+        </table>
     </div>
-<!-- 
-    <table>
-        <tr>
-            <th>Tipo de recaudo</th>
-            <th>Documento asignado</th>
-            <th>Acciones</th>
-        </tr>
-        @for(pair of pairs; track pair) {
-        <tr>
-            <td>{{ pair[0] }}</td>
-            <td>{{ pair[1].name }}</td>
-        </tr>
-    }
-    </table> -->
-    <mat-table [dataSource]="dataSource">
+
+    <!-- <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="tipoRecaudo">
           <mat-header-cell *matHeaderCellDef>Tipo de recaudo</mat-header-cell>
           <mat-cell *matCellDef="let element;"> {{element[0]}} </mat-cell>
@@ -69,7 +81,7 @@
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </mat-table>
+      </mat-table> -->
 
     }
 

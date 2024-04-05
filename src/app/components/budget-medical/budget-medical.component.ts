@@ -64,13 +64,13 @@ export class BudgetMedicalComponent {
 
   pairDoc(){
     const document: File = this.documents[this.docsSelect?.value];
-    const type = this.typeDocuments[this.typesSelect?.value];
+    const type = this.typeDocuments[this.typesSelect?.value -1];
 
     
-    this.documents.splice(this.docsSelect?.value, this.docsSelect?.value + 1);    
-    this.pairs.push([type.name, document.name]);
+    this.documents.splice(this.docsSelect?.value , this.docsSelect?.value);    
+    this.pairs.push([type.name, document]);
 
-    console.log(this.dataSource);
+    console.log(this.pairs);
   
   };
 

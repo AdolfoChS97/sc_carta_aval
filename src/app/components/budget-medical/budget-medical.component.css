@@ -2,12 +2,22 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
+.tableDocument{
+  text-align: center;
+}
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #464646;
   padding: 8px;
 }
 
 th {
   text-align: center;
+}
+
+.edit-icon {
+  color: rgb(32, 175, 3);
+}
+.deletd-icon {
+  color: rgb(185, 6, 6);
 }
