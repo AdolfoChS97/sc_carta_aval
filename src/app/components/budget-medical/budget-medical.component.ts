@@ -74,12 +74,12 @@ export class BudgetMedicalComponent {
     console.log(this.pairs);
   };
 
-  deletePairDoc(id: number){
-    const table = this.table?.nativeElement;
-    console.log(table);
-    delete this.pairs[id];
-    table?.deleteRow(id + 1);
-    console.log(this.pairs);
-  }
+  // deletePairDoc(id: number){
+  //   const table = this.table?.nativeElement;
+  //   console.log(table);
+  //   delete this.pairs[id];
+  //   table?.deleteRow(id + 1);
+  //   console.log(this.pairs);
+  // }
 
 }
