@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import { FORMERR } from 'node:dns';
+
 
 
 @Component({
@@ -40,6 +42,8 @@ export class BudgetMedicalComponent {
   ];
   @ViewChild('docs') docsSelect: MatSelect | undefined;
   @ViewChild('types') typesSelect: MatSelect | undefined;
+  @ViewChild('table') table: ElementRef | undefined;
+
   pairs: any[] = [];
   dataSource = this.pairs ;
   displayedColumns = ["tipoRecaudo", "documentoAsignado"];
@@ -65,13 +69,17 @@ export class BudgetMedicalComponent {
   pairDoc(){
     const document: File = this.documents[this.docsSelect?.value];
     const type = this.typeDocuments[this.typesSelect?.value -1];
-
-    
     this.documents.splice(this.docsSelect?.value , this.docsSelect?.value);    
     this.pairs.push([type.name, document]);
-
     console.log(this.pairs);
-  
   };
+
+  deletePairDoc(id: number){
+    const table = this.table?.nativeElement;
+    console.log(table);
+    delete this.pairs[id];
+    table?.deleteRow(id + 1);
+    console.log(this.pairs);
+  }
 
 }

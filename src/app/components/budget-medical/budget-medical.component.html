@@ -47,25 +47,25 @@
     </div> -->
 
     <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
-        <table class="tableDocument">
+        <table #table class="tableDocument">
             <tr>
                 <th>Tipo de recaudo</th>
                 <th>Documento asignado</th>
-                <th>Acciones</th>
+                <!-- <th>Acciones</th> -->
             </tr>
-            @for(pair of pairs; track pair) {
-            <tr>
-                <td>{{ pair[0] }}</td>
-                <td>{{ pair[1].name }}</td>
-                <td>
-                    <button mat-icon-button aria-label="edit icon-button with edit icon">
-                        <mat-icon class="edit-icon">visibility</mat-icon>
-                      </button>
-                      <button mat-icon-button aria-label="edit icon-button with edit icon">
-                        <mat-icon class="deletd-icon">delete</mat-icon>
-                      </button>
-                </td>
-            </tr>
+            @for(pair of pairs; track pair; let idx = $index) {
+                <tr>
+                    <td>{{ pair[0] }}</td>
+                    <td>{{ pair[1].name }}</td>
+                    <!-- <td>
+                        <button mat-icon-button aria-label="edit icon-button with edit icon">
+                            <mat-icon class="edit-icon">visibility</mat-icon>
+                          </button>
+                          <button (click)="deletePairDoc(idx)" mat-icon-button aria-label="edit icon-button with edit icon">
+                            <mat-icon class="deletd-icon">delete</mat-icon>
+                          </button>
+                    </td> -->
+                </tr> 
         }
         </table>
     </div>
