@@ -1,11 +1,25 @@
 <div class="container">
-    <app-endorsement></app-endorsement>
-    <br>
-    <mat-divider></mat-divider>
-    <br>
-    <app-budget-breakdown></app-budget-breakdown>
-    <br>
-    <mat-divider></mat-divider>
-    <br>
-    <app-budget-medical></app-budget-medical>
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="budgetBreakdown">
+            <ng-template matStepLabel>Datos Solictante</ng-template>
+            <app-endorsement></app-endorsement>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="budgetMedical" label="Presupuesto">
+            <app-budget-breakdown></app-budget-breakdown>
+            <div>
+                <button mat-button matStepperPrevious>Regresar</button>
+                <button mat-button matStepperNext>Siguiente</button>
+              </div>
+        </mat-step>
+
+        <mat-step [stepControl]="endorsementFormGro" label="Informacion adicional">
+            <app-budget-medical></app-budget-medical>
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button>Terminar</button>
+        </mat-step>
+    </mat-stepper>
+
 </div>
