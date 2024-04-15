@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { EndorsementComponent } from './components/endorsement/endorsement.component';
@@ -7,7 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-breakdown.component';
 import { BudgetMedicalComponent } from './components/budget-medical/budget-medical.component';
 import { FormBuilder, Validators,FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatStepperModule} from '@angular/material/stepper';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 
 
@@ -29,17 +29,27 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  budgetBreakdown = this._formBuilder.group({
+
+  @ViewChild('stepper') stepper: MatStepper | undefined;
+
+
+  endorsement = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
-  budgetMedical = this._formBuilder.group({
+  budgetBreakdown = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   })
-  endorsementFormGro = this._formBuilder.group({
+  budgetMedical = this._formBuilder.group({
     thirdCtrl: ['', Validators.required],
   });
   isLinear = false;
 
 
   constructor(private _formBuilder: FormBuilder) {}
+
+  onEndorsementData($event: any){
+    this.endorsement.controls['firstCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.endorsement.controls['firstCtrl'].getRawValue());
+  }
 }

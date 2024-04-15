@@ -1,13 +1,10 @@
 <div class="container">
     <mat-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="budgetBreakdown">
+        <mat-step [stepControl]="endorsement">
             <ng-template matStepLabel>Datos Solictante</ng-template>
-            <app-endorsement></app-endorsement>
-            <div>
-                <button mat-button matStepperNext>Siguiente</button>
-            </div>
+            <app-endorsement (endorsementData)="onEndorsementData($event)"></app-endorsement>
         </mat-step>
-        <mat-step [stepControl]="budgetMedical" label="Presupuesto">
+        <mat-step [stepControl]="budgetBreakdown" label="Presupuesto">
             <app-budget-breakdown></app-budget-breakdown>
             <div>
                 <button mat-button matStepperPrevious>Regresar</button>
@@ -15,7 +12,7 @@
               </div>
         </mat-step>
 
-        <mat-step [stepControl]="endorsementFormGro" label="Informacion adicional">
+        <mat-step [stepControl]="budgetMedical" label="Informacion adicional">
             <app-budget-medical></app-budget-medical>
             <button mat-button matStepperPrevious>Regresar</button>
             <button mat-button>Terminar</button>

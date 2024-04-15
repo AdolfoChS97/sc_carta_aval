@@ -51,7 +51,7 @@
                         <mat-label>Elegir enfermedad / Sintoma</mat-label>
                         <input type="text" matInput (keyup)="onKeyUpIllness($event)" [formControl]="suggestsIllness"
                             [matAutocomplete]="autoillness">
-                        <mat-autocomplete #autoillness="matAutocomplete">
+                        <mat-autocomplete #autoillness="matAutocomplete" (optionSelected)="onOptionSelected($event, 'illness')">
                             @for (illness of filteredIllness | async; track illness) {
                             <mat-option [value]="illness">{{ illness }}</mat-option>
                             }
@@ -61,24 +61,22 @@
                         <mat-label>Nombre centro clinico</mat-label>
                         <input type="text" aria-label="Clinicas" matInput [formControl]="suggests"
                             [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event, 'clinic')">
                             @for (clinic of filteredOption | async; track clinic) {
                             <mat-option [value]="clinic">{{clinic}}</mat-option>
                             }
                         </mat-autocomplete>
-
                         <!-- <mat-hint>Al digitar el rif del centro clínico aparecerá el nombre acá de existir</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div fxLayout="row">
 
                 </div>
-
                 <div fxLayout="row">
                     <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>Fecha de atención medica:</mat-label>
-                        <input matInput [matDatepicker]="picker">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <input matInput [matDatepicker]="picker" formControlName="dateAttention" (dateChange)="onDateChange($event)" >
+                        <mat-hint>DD/MM/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -86,13 +84,14 @@
                         <mat-label>
                             Número del presupuesto
                         </mat-label>
-                        <input type="text" matInput placeholder="Inserte número de presupuesto">
+                        <input type="text" matInput formControlName="budgetNumber" placeholder="Inserte número de presupuesto">
                     </mat-form-field>
                     <mat-form-field fxFlex="33" class="mr-1 mb-1">
                         <mat-label>
                             Monto del presupuesto
                         </mat-label>
-                        <input type="text" matInput placeholder="0000000" (keypress)="numberPresupuesto($event , 'presupuesto')">
+                        <input type="text" matInput 
+                        formControlName="budgetAmount" placeholder="0000000">
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start center">
@@ -116,8 +115,10 @@
                         </mat-autocomplete>
                     </mat-form-field>
                 </div>
-
             </form>
+        </div>
+        <div fxLayout="row">
+            <button type="button" mat-raised-button color="primary" (click)="onSubmit()">Siguiente</button>
         </div>
     </div>
 </div>
