@@ -1,7 +1,7 @@
 <div class="container">
     <mat-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="endorsement">
-            <ng-template matStepLabel>Datos Solictante</ng-template>
+            <ng-template matStepLabel>Datos Solicitante</ng-template>
             <app-endorsement (endorsementData)="onEndorsementData($event)"></app-endorsement>
         </mat-step>
         <mat-step [stepControl]="budgetBreakdown" label="Presupuesto">
