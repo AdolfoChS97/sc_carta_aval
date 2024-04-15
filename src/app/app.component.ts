@@ -52,4 +52,15 @@ export class AppComponent {
     this.stepper?.next();
     console.log(this.endorsement.controls['firstCtrl'].getRawValue());
   }
+
+  onBudgetBreakdownData($event: any){
+    this.budgetBreakdown.controls['secondCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.budgetBreakdown.controls['secondCtrl'].getRawValue());
+  }
+  backBudgetBreakdown(){
+    this.stepper?.previous();
+  }
+
+
 }

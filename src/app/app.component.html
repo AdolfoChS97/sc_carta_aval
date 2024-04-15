@@ -5,17 +5,17 @@
             <app-endorsement (endorsementData)="onEndorsementData($event)"></app-endorsement>
         </mat-step>
         <mat-step [stepControl]="budgetBreakdown" label="Presupuesto">
-            <app-budget-breakdown></app-budget-breakdown>
+            <app-budget-breakdown (budgetBreakdownData)="onBudgetBreakdownData($event)"></app-budget-breakdown>
             <div>
-                <button mat-button matStepperPrevious>Regresar</button>
-                <button mat-button matStepperNext>Siguiente</button>
+                <!-- <button mat-button matStepperPrevious>Regresar</button>
+                <button mat-button matStepperNext>Siguiente</button> -->
               </div>
         </mat-step>
 
         <mat-step [stepControl]="budgetMedical" label="Informacion adicional">
             <app-budget-medical></app-budget-medical>
-            <button mat-button matStepperPrevious>Regresar</button>
-            <button mat-button>Terminar</button>
+            <!-- <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button>Terminar</button> -->
         </mat-step>
     </mat-stepper>
 

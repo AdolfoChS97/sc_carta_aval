@@ -1,20 +1,23 @@
-import { Component} from '@angular/core';
+import { Component, Output, EventEmitter} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-budget-breakdown',
   standalone: true,
-  imports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,MatButtonModule],
   templateUrl: './budget-breakdown.component.html',
   styleUrl: './budget-breakdown.component.css'
 })
 
 export class BudgetBreakdownComponent{
 form :FormGroup = new FormGroup({})
+
+@Output('budgetBreakdownData') budgetBreakdownData: any = new EventEmitter();
 
 constructor(){
   this.form.addControl('clinicExpenses' , new FormControl(0));
@@ -38,6 +41,17 @@ constructor(){
     const addition = v1 + v2;
     this.form.controls['totalExpenses'].setValue(`${addition.toLocaleString()} USD`); 
 
+  }
+
+  onSubmit(){
+    if(this.form.valid) {
+      if(this.form.controls['totalExpenses'].value){
+        this.budgetBreakdownData.emit(this.form.getRawValue());
+      }
+
+    } else {
+      // TODO: mostrar error
+    }
   }
 
 
