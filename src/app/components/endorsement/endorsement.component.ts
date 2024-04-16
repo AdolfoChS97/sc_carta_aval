@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectChange, MatSelectModule} from '@angular/material/select';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
 import { PoliciesService } from '../../services/policies.service';
 import { ClinicsService } from '../../services/clinics.service';
 import { IllnessesService } from '../../services/illnesses.service';
@@ -19,6 +19,7 @@ import { ThirdParties } from '../../types/ThirdParty';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -37,14 +38,16 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers : [
     provideNativeDateAdapter(),
     PoliciesService,
     ClinicsService,
     IllnessesService,
-    ThirdPartiesService
+    ThirdPartiesService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   templateUrl: './endorsement.component.html',
   styleUrl: './endorsement.component.css'
@@ -52,7 +55,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class EndorsementComponent  implements OnInit {
 
 
-  
+  illnesses: any;
+  clinics: any;
   policies: string[] | [] = [];
   thirdParties: ThirdParties[] | [] = [];
   suggests = new FormControl('') as FormControl<string>;
@@ -75,6 +79,8 @@ export class EndorsementComponent  implements OnInit {
     {value: '0426' , viewValue: '0426'},
   ]
 
+  @Output('endorsementData') endorsementData: any = new EventEmitter();
+
   constructor(
     private policiesService : PoliciesService,
     private clinicsService : ClinicsService,
@@ -92,12 +98,12 @@ export class EndorsementComponent  implements OnInit {
     this.form.controls['policy'].addValidators([Validators.required])
 
     
-    this.form.addControl('illness', new FormControl([]));
+    this.form.addControl('illness', new FormControl(''));
     this.form.controls['illness'].disable();
     this.form.controls['illness'].addValidators([Validators.required]);
 
-    this.form.addControl('dateAtention' , new FormControl(''));
-    this.form.controls['dateAtention'].addValidators([Validators.required]);
+    this.form.addControl('dateAttention' , new FormControl(''));
+    this.form.controls['dateAttention'].addValidators([Validators.required]);
 
     this.form.addControl('budgetNumber' , new FormControl(''));
     this.form.controls['budgetNumber'].addValidators([Validators.required]);
@@ -114,12 +120,10 @@ export class EndorsementComponent  implements OnInit {
     this.form.controls['email'].disable();
     this.form.controls['email'].addValidators([Validators.required]);
 
-  
 
-
-    this.form.addControl('clinics' , new FormControl([]));
-    this.form.controls['clinics'].disable();
-    this.form.controls['clinics'].addValidators([Validators.required])
+    this.form.addControl('clinic' , new FormControl([]));
+    this.form.controls['clinic'].disable();
+    this.form.controls['clinic'].addValidators([Validators.required])
 
 
     this.form.addControl('thirdParty', new FormControl(''));
@@ -131,20 +135,19 @@ export class EndorsementComponent  implements OnInit {
       const clinics = await this.clinicsService.getClinics();
 
       if(clinics.get('clinics')?.length > 1) {
-        this.form.controls['clinics'].enable();
-        this.form.controls['clinics'].
-        setValue(clinics.get('clinics'));  
+        this.form.controls['clinic'].enable();  
+        this.clinics = clinics.get('clinics');
       }
 
       this.filteredOption = this.suggests?.valueChanges.pipe(
         startWith(''),
-        map((value: string) => _filter(value || '', this.form.controls['clinics'].getRawValue())),
+        map((value: string) => _filter(value || '', this.clinics)),
       );
 
     } catch (e) {
       this.suggests.disable();
-      this.form.controls['clinics'].disable();
-      this.form.controls['clinics'].setValue([]);
+      this.form.controls['clinic'].disable();
+      this.form.controls['clinic'].setValue([]);
 
     }
   }
@@ -201,13 +204,12 @@ export class EndorsementComponent  implements OnInit {
 
     if(illnesses?.length > 1){
       this.form.controls['illness'].enable();
-      this.form.controls['illness'].setValue(illnesses);
-     
+      this.illnesses = illnesses;
     }
 
     this.filteredIllness = this.suggestsIllness?.valueChanges.pipe(
       startWith(''),
-      map((value: string) => _filter(value || '', this.form.controls['illness']?.getRawValue())),
+      map((value: string) => _filter(value || '', this.illnesses)),
     )
   }
 
@@ -226,6 +228,25 @@ export class EndorsementComponent  implements OnInit {
       return false;
     }
     return true;  
+  }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent, identificator: string) {
+    const value = event?.option?.value as unknown as string;
+    this.form.controls[identificator].setValue(value);
+  }
+
+  onDateChange($event: MatDatepickerInputEvent<string>) {
+    const value = $event?.value as unknown as string;
+    this.form.controls['dateAttention'].setValue(value);
+  }
+
+  onSubmit(){
+    if(this.form.valid) {
+      this.endorsementData.emit(this.form.getRawValue());
+    } else {
+      // TODO: mostrar error
+    }
+  
   }
 
 } 

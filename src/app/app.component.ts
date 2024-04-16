@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { EndorsementComponent } from './components/endorsement/endorsement.component';
@@ -6,6 +6,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { BudgetBreakdownComponent } from './components/budget-breakdown/budget-breakdown.component';
 import { BudgetMedicalComponent } from './components/budget-medical/budget-medical.component';
+import { FormBuilder, Validators,FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-root',
@@ -18,8 +22,55 @@ import { BudgetMedicalComponent } from './components/budget-medical/budget-medic
     BudgetBreakdownComponent, 
     BudgetMedicalComponent,
     MatDividerModule,
+    MatStepperModule,
+    MatButtonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {}
+export class AppComponent {
+
+  @ViewChild('stepper') stepper: MatStepper | undefined;
+
+
+  endorsement = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  budgetBreakdown = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  })
+  budgetMedical = this._formBuilder.group({
+    thirdCtrl: ['', Validators.required],
+  });
+  isLinear = false;
+
+
+  constructor(private _formBuilder: FormBuilder) {}
+
+  onEndorsementData($event: any){
+    this.endorsement.controls['firstCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.endorsement.controls['firstCtrl'].getRawValue());
+  }
+
+  onBudgetBreakdownData($event: any){
+    if ($event?.back) {
+      this.stepper?.previous();
+    }else{
+    this.budgetBreakdown.controls['secondCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.budgetBreakdown.controls['secondCtrl'].getRawValue());
+    }
+  }
+
+  onBudgetMedicalData($event: any){
+    if ($event?.back) {
+      this.stepper?.previous();
+    } else {
+    this.budgetMedical.controls['thirdCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.budgetMedical.controls['thirdCtrl'].getRawValue());
+    }
+  }
+
+}
