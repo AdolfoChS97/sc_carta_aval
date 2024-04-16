@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,9 @@ import { FORMERR } from 'node:dns';
   styleUrl: './budget-medical.component.css'
 })
 export class BudgetMedicalComponent {
+
+  @Output('budgetMedicalData') budgetMedicalData: any = new EventEmitter();
+
 
   documents: File[] = [];
   typeDocuments: Array<{ id: number, name: string }> = [
@@ -74,12 +77,27 @@ export class BudgetMedicalComponent {
     console.log(this.pairs);
   };
 
-  // deletePairDoc(id: number){
-  //   const table = this.table?.nativeElement;
-  //   console.log(table);
-  //   delete this.pairs[id];
-  //   table?.deleteRow(id + 1);
-  //   console.log(this.pairs);
-  // }
+  deletePairDoc(id: number) {
+    const table = this.table?.nativeElement;
+    if (table) {
+      this.pairs.splice(0, id);
+      table.deleteRow(id+1);
+      console.log(this.pairs);
+    } else {
+      console.error('Error al eliminar fila de la tabla');
+    }
+  }
+
+  onSubmit(){
+    if(this.pairs.length > 0) {
+        this.budgetMedicalData.emit(this.pairs);
+    } else {
+      // TODO: mostrar error
+    }
+  }
+
+  onBackClick() {
+    this.budgetMedicalData.emit({ back: true });
+  }
 
 }

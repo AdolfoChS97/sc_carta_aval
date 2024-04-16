@@ -52,42 +52,30 @@
                 <tr>
                     <th>Tipo de recaudo</th>
                     <th>Documento asignado</th>
-                    <!-- <th>Acciones</th> -->
+                    <th>Acciones</th>
                 </tr>
                 @for(pair of pairs; track pair; let idx = $index) {
                     <tr>
                         <td>{{ pair[0] }}</td>
                         <td>{{ pair[1].name }}</td>
-                        <!-- <td>
-                            <button mat-icon-button aria-label="edit icon-button with edit icon">
+                        <td>
+                            <!-- <button mat-icon-button aria-label="edit icon-button with edit icon">
                                 <mat-icon class="edit-icon">visibility</mat-icon>
-                              </button>
+                              </button> -->
                               <button (click)="deletePairDoc(idx)" mat-icon-button aria-label="edit icon-button with edit icon">
                                 <mat-icon class="deletd-icon">delete</mat-icon>
                               </button>
-                        </td> -->
+                        </td>
                     </tr> 
             }
             </table>
         </div>
     
-        <!-- <mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="tipoRecaudo">
-              <mat-header-cell *matHeaderCellDef>Tipo de recaudo</mat-header-cell>
-              <mat-cell *matCellDef="let element;"> {{element[0]}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="documentoAsignado">
-              <mat-header-cell *matHeaderCellDef>Documento asignado</mat-header-cell>
-              <mat-cell *matCellDef="let element;"> {{element[1]}} </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-          </mat-table> -->
         }
     </div>
-    <div fxLayout="row">
-        <button type="button" class="mr-1" mat-raised-button color="warn">Atras</button>
-        <button type="button" class="mr-1" mat-raised-button color="primary">Siguiente</button>
+    <div fxLayout="row" class="button-action">
+        <button type="button" class="mr-1" mat-raised-button (click)="onBackClick()" color="warn">Atras</button>
+        <button type="button" class="mr-1" mat-raised-button color="primary" (click)="onSubmit()">Finalizar</button>
     </div>
 </div>
 

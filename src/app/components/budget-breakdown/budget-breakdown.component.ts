@@ -22,8 +22,6 @@ form :FormGroup = new FormGroup({})
 
 @Output('budgetBreakdownData') budgetBreakdownData: any = new EventEmitter();
 
-@Input('stepper') stepper: MatStepper | undefined;
-
 
 constructor(){
   this.form.addControl('clinicExpenses' , new FormControl(0));
@@ -52,10 +50,8 @@ constructor(){
   }
 
   onSubmit(){
-    if(this.form.valid) {
-      if(this.form.controls['totalExpenses'].value){
+    if(this.form.valid && parseInt(this.form.controls['totalExpenses'].value?.split(' ')[0]) > 0) {
         this.budgetBreakdownData.emit(this.form.getRawValue());
-      }
     } else {
       // TODO: mostrar error
     }
@@ -63,6 +59,6 @@ constructor(){
 
 
   onBackClick() {
-    this.budgetBreakdownData.emit('');
+    this.budgetBreakdownData.emit({ back: true });
   }
 }

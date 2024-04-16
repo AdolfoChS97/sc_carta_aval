@@ -54,7 +54,7 @@ export class AppComponent {
   }
 
   onBudgetBreakdownData($event: any){
-    if (!$event || $event === '') {
+    if ($event?.back) {
       this.stepper?.previous();
     }else{
     this.budgetBreakdown.controls['secondCtrl'].setValue($event);
@@ -64,9 +64,9 @@ export class AppComponent {
   }
 
   onBudgetMedicalData($event: any){
-    if (!$event || $event === '' || $event === null) {
+    if ($event?.back) {
       this.stepper?.previous();
-    }else{
+    } else {
     this.budgetMedical.controls['thirdCtrl'].setValue($event);
     this.stepper?.next();
     console.log(this.budgetMedical.controls['thirdCtrl'].getRawValue());
