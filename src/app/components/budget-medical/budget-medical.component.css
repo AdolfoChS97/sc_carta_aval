@@ -1,0 +1,26 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tableDocument{
+  text-align: center;
+}
+
+th, td {
+  border: 1px solid #9e9d9d;
+  padding: 8px;
+}
+
+th {
+  text-align: center;
+}
+
+.edit-icon {
+  color: #3f51b5;
+}
+.deletd-icon {
+  color: rgb(185, 6, 6);
+}
+.button-action{
+  margin-top: 1rem;
+}
