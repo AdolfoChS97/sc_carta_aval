@@ -54,13 +54,23 @@ export class AppComponent {
   }
 
   onBudgetBreakdownData($event: any){
+    if (!$event || $event === '') {
+      this.stepper?.previous();
+    }else{
     this.budgetBreakdown.controls['secondCtrl'].setValue($event);
     this.stepper?.next();
     console.log(this.budgetBreakdown.controls['secondCtrl'].getRawValue());
-  }
-  backBudgetBreakdown(){
-    this.stepper?.previous();
+    }
   }
 
+  onBudgetMedicalData($event: any){
+    if (!$event || $event === '' || $event === null) {
+      this.stepper?.previous();
+    }else{
+    this.budgetMedical.controls['thirdCtrl'].setValue($event);
+    this.stepper?.next();
+    console.log(this.budgetMedical.controls['thirdCtrl'].getRawValue());
+    }
+  }
 
 }

@@ -1,15 +1,18 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { Component, Output, EventEmitter, Input} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+
+
 
 @Component({
   selector: 'app-budget-breakdown',
   standalone: true,
-  imports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,MatButtonModule],
+  imports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,MatButtonModule,MatStepperModule],
   templateUrl: './budget-breakdown.component.html',
   styleUrl: './budget-breakdown.component.css'
 })
@@ -19,11 +22,16 @@ form :FormGroup = new FormGroup({})
 
 @Output('budgetBreakdownData') budgetBreakdownData: any = new EventEmitter();
 
+@Input('stepper') stepper: MatStepper | undefined;
+
+
 constructor(){
   this.form.addControl('clinicExpenses' , new FormControl(0));
   this.form.addControl('honoraryExpenses' , new FormControl(0));
   this.form.addControl('totalExpenses' , new FormControl(0));
   this.form.controls['totalExpenses'].disable();
+
+ 
 }
 
   numberOnly(event: any, type: string): boolean {
@@ -48,11 +56,13 @@ constructor(){
       if(this.form.controls['totalExpenses'].value){
         this.budgetBreakdownData.emit(this.form.getRawValue());
       }
-
     } else {
       // TODO: mostrar error
     }
   }
 
 
+  onBackClick() {
+    this.budgetBreakdownData.emit('');
+  }
 }

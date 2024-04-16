@@ -7,15 +7,11 @@
         <mat-step [stepControl]="budgetBreakdown" label="Presupuesto">
             <app-budget-breakdown (budgetBreakdownData)="onBudgetBreakdownData($event)"></app-budget-breakdown>
             <div>
-                <!-- <button mat-button matStepperPrevious>Regresar</button>
-                <button mat-button matStepperNext>Siguiente</button> -->
               </div>
         </mat-step>
 
         <mat-step [stepControl]="budgetMedical" label="Informacion adicional">
-            <app-budget-medical></app-budget-medical>
-            <!-- <button mat-button matStepperPrevious>Regresar</button>
-            <button mat-button>Terminar</button> -->
+            <app-budget-medical (budgetMedicalData)="onBudgetMedicalData($event)"></app-budget-medical>
         </mat-step>
     </mat-stepper>
 
